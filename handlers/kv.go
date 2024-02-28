@@ -84,3 +84,31 @@ func PutKVHandler() fiber.Handler {
 		return c.Status(http.StatusOK).JSON(res)
 	}
 }
+
+func RedirectKVHandler() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		key := c.Params("key")
+
+		path := constants.BaseKVPath + "/values/" + key
+
+		client := fiber.Get(path)
+		client.Set("Authorization", "Bearer "+constants.CFToken)
+		client.ContentType("application/json")
+
+		statusCode, body, err := client.Bytes()
+
+		if err != nil {
+			return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+				"error": err,
+			})
+		}
+
+		if statusCode != http.StatusOK {
+			return c.Status(statusCode).JSON(fiber.Map{
+				"error": string(body),
+			})
+		}
+
+		return c.Status(http.StatusOK).Redirect(string(body))
+	}
+}

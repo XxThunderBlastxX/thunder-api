@@ -8,5 +8,7 @@ import (
 func Routes(app *fiber.App) {
 	app.Get("/", handlers.AppHandler())
 
-	app.Put("/kv", handlers.PutKVHandler())
+	kv := app.Group("/kv")
+	kv.Put("/put", handlers.PutKVHandler())
+	app.Get("/:key", handlers.RedirectKVHandler())
 }

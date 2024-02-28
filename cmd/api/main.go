@@ -5,6 +5,8 @@ import (
 	"github.com/XxThunderBlast/thunder-api/constants"
 	"github.com/XxThunderBlast/thunder-api/routes"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
 	"log"
 	"os"
@@ -26,9 +28,15 @@ func init() {
 }
 
 func main() {
-
-	// Start the server
 	app := fiber.New()
+
+	app.Use(cors.New())
+
+	app.Use(logger.New(logger.Config{
+		Format:        "${pid} ${locals:requestid} ${status} - ${method} ${path}\n",
+		TimeZone:      "Asia/Kolkata",
+		DisableColors: false,
+	}))
 
 	routes.Routes(app)
 
@@ -36,5 +44,4 @@ func main() {
 	if err := app.Listen(":" + PORT); err != nil {
 		log.Fatal(err)
 	}
-
 }
