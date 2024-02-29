@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/XxThunderBlast/thunder-api/global"
+	"github.com/XxThunderBlast/thunder-api/api/routes"
 	"github.com/XxThunderBlast/thunder-api/internal/env"
+	"github.com/XxThunderBlast/thunder-api/internal/global"
 	"github.com/XxThunderBlast/thunder-api/internal/timer"
-	"github.com/XxThunderBlast/thunder-api/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -35,7 +35,7 @@ func main() {
 		DisableColors: false,
 	}))
 
-	routes.Routes(app)
+	routes.SetupRoutes(app)
 
 	if err := app.Listen(":" + global.Env.APIPort); err != nil {
 		log.Fatal(err)

@@ -1,12 +1,12 @@
-package handlers
+package controller
 
 import (
-	"github.com/XxThunderBlast/thunder-api/global"
+	"github.com/XxThunderBlast/thunder-api/internal/global"
 	"github.com/XxThunderBlast/thunder-api/internal/timer"
 	"github.com/gofiber/fiber/v2"
 )
 
-func AppHandler() fiber.Handler {
+func AppController() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"status":  "OK",

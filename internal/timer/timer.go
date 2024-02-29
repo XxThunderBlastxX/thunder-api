@@ -1,7 +1,7 @@
 package timer
 
 import (
-	"github.com/XxThunderBlast/thunder-api/global"
+	"github.com/XxThunderBlast/thunder-api/internal/global"
 	"time"
 )
 
