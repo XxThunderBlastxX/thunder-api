@@ -23,6 +23,15 @@ dev:
 	@echo "Running development environment..."
 	@go run $(MAIN_PACKAGE)
 
+## watch: run the application with reloading on file changes
+.PHONY: watch
+watch:
+	@air \
+		--build.cmd "make build" --build.bin "bin/${BINARY_NAME}" --build.delay "100" \
+        --build.exclude_dir "" \
+        --build.include_ext "go, tpl, tmpl, html, css, scss, js, ts, sql, jpeg, jpg, gif, png, bmp, svg, webp, ico" \
+        --misc.clean_on_exit "true"
+
 
 # ==================================================================================== #
 # QUALITY CONTROL
