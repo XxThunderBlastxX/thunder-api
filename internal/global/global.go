@@ -1,7 +1,6 @@
 package global
 
 import (
-	"fmt"
 	"github.com/XxThunderBlast/thunder-api/internal/env"
 	"time"
 )
@@ -9,7 +8,7 @@ import (
 var (
 	Timer time.Time
 
-	BaseKVPath = fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%s/storage/kv/namespaces/%s", Env.CFAccountId, Env.KvNamespaceId)
+	BaseKVPath string
 
 	Env env.Env
 )

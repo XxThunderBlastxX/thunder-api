@@ -43,16 +43,24 @@ func (kv *kvRepository) GetValue(key string) (string, error) {
 func (kv *kvRepository) SetKeyValue(key string, value string) error {
 	var res map[string]interface{}
 
-	reqURl := kv.BaseUrl + "bulk"
+	reqURl := kv.BaseUrl + "/bulk"
+
+	reqBody := []types.KVRequest{
+		{
+			Base64: false,
+			Key:    key,
+			Value:  value,
+		},
+	}
 
 	agent := fiber.Put(reqURl)
 	agent.Set("Authorization", "Bearer "+kv.AuthKey)
 	agent.ContentType("application/json")
 
-	if reqBody, err := json.Marshal(types.KVRequest{Base64: false, Key: key, Value: value}); err != nil {
+	if jsonBody, err := json.Marshal(reqBody); err != nil {
 		return err
 	} else {
-		agent.Body(reqBody)
+		agent.Body(jsonBody)
 	}
 
 	statusCode, body, err := agent.Bytes()
@@ -66,7 +74,7 @@ func (kv *kvRepository) SetKeyValue(key string, value string) error {
 	}
 
 	if statusCode != 200 {
-		errMsg := res["errors"].(map[string]interface{})["message"]
+		errMsg := res["errors"].([]interface{})[0].(map[string]interface{})["message"]
 		return errors.New(errMsg.(string))
 	}
 
@@ -81,19 +89,21 @@ func (kv *kvRepository) ListKeys() (keys []string, err error) {
 	agent.Set("Authorization", "Bearer "+kv.AuthKey)
 	agent.ContentType("application/json")
 
-	statusCode, body, resErr := agent.Bytes()
+	agent.Debug()
 
-	if err := json.Unmarshal(body, &res); err != nil {
-		return nil, err
-	}
+	statusCode, body, resErr := agent.Bytes()
 
 	if resErr != nil {
 		return nil, resErr[0]
 	}
 
 	if statusCode != 200 {
-		errMsg := res["errors"].(map[string]interface{})["message"]
+		errMsg := res["errors"].([]interface{})[0].(map[string]interface{})["message"]
 		return nil, errors.New(errMsg.(string))
+	}
+
+	if err := json.Unmarshal(body, &res); err != nil {
+		return nil, err
 	}
 
 	results := res["result"].([]map[string]interface{})

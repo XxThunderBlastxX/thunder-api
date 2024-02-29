@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/XxThunderBlast/thunder-api/api/routes"
 	"github.com/XxThunderBlast/thunder-api/internal/env"
 	"github.com/XxThunderBlast/thunder-api/internal/global"
@@ -22,6 +23,8 @@ func init() {
 	} else {
 		global.Env = loadEnv
 	}
+
+	global.BaseKVPath = fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%v/storage/kv/namespaces/%v", global.Env.CFAccountId, global.Env.KvNamespaceId)
 }
 
 func main() {
