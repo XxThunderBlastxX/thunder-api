@@ -1,6 +1,9 @@
 # Miscelleneous
 .env
 
+# binaries
+bin
+
 # JetBrains
 .idea
 
