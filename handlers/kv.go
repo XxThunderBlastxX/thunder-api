@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/XxThunderBlast/thunder-api/constants"
+	"github.com/XxThunderBlast/thunder-api/global"
 	"github.com/XxThunderBlast/thunder-api/types"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
@@ -11,10 +11,10 @@ import (
 func GetKeyListHandler() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		var res types.KVResponse
-		path := constants.BaseKVPath + "/keys"
+		path := global.BaseKVPath + "/keys"
 
 		client := fiber.Get(path)
-		client.Set("Authorization", "Bearer "+constants.CFToken)
+		client.Set("Authorization", "Bearer "+global.Env.CFToken)
 		client.ContentType("application/json")
 
 		statusCode, body, err := client.Bytes()
@@ -46,7 +46,7 @@ func PutKVHandler() fiber.Handler {
 		var res types.KVResponse
 		var req []types.KVRequest
 
-		path := constants.BaseKVPath + "/bulk"
+		path := global.BaseKVPath + "/bulk"
 
 		if err := c.BodyParser(&req); err != nil {
 			return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
@@ -55,7 +55,7 @@ func PutKVHandler() fiber.Handler {
 		}
 
 		agent := fiber.Put(path)
-		agent.Set("Authorization", "Bearer "+constants.CFToken)
+		agent.Set("Authorization", "Bearer "+global.Env.CFToken)
 		agent.ContentType("application/json")
 
 		reqBody, _ := json.Marshal(req)
@@ -89,10 +89,10 @@ func RedirectKVHandler() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		key := c.Params("key")
 
-		path := constants.BaseKVPath + "/values/" + key
+		path := global.BaseKVPath + "/values/" + key
 
 		client := fiber.Get(path)
-		client.Set("Authorization", "Bearer "+constants.CFToken)
+		client.Set("Authorization", "Bearer "+global.Env.CFToken)
 		client.ContentType("application/json")
 
 		statusCode, body, err := client.Bytes()

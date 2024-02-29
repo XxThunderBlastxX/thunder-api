@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"github.com/XxThunderBlast/thunder-api/constants"
+	"github.com/XxThunderBlast/thunder-api/global"
+	"github.com/XxThunderBlast/thunder-api/internal/timer"
 	"github.com/gofiber/fiber/v2"
-	"time"
 )
 
 func AppHandler() fiber.Handler {
@@ -13,10 +13,10 @@ func AppHandler() fiber.Handler {
 			"app":     "Thunder-API",
 			"version": "1.0.0",
 			"uptime": fiber.Map{
-				"start": constants.Timer,
-				"hr":    time.Since(constants.Timer).Hours(),
-				"min":   time.Since(constants.Timer).Minutes(),
-				"sec":   time.Since(constants.Timer).Seconds(),
+				"start": global.Timer,
+				"hr":    timer.TimeElapsedHR(),
+				"min":   timer.TimeElapsedMin(),
+				"sec":   timer.TimeElapsedSec(),
 			},
 		})
 	}
