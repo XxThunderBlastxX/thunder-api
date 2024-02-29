@@ -38,6 +38,13 @@ func main() {
 		DisableColors: false,
 	}))
 
+	// 404 middleware handler
+	app.Use(func(c *fiber.Ctx) error {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"error": "Route not found",
+		})
+	})
+
 	routes.SetupRoutes(app)
 
 	if err := app.Listen(":" + global.Env.APIPort); err != nil {
