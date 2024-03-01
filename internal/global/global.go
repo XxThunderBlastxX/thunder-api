@@ -9,8 +9,6 @@ import (
 var (
 	Timer time.Time
 
-	BaseKVPath string
-
 	Env env.Env
 
 	Db *mongo.Database

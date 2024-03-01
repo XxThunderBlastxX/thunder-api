@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"github.com/XxThunderBlast/thunder-api/api/controller"
 	"github.com/XxThunderBlast/thunder-api/internal/global"
 	"github.com/XxThunderBlast/thunder-api/internal/repository"
@@ -9,7 +10,9 @@ import (
 )
 
 func RedirectRouter(router fiber.Router) {
-	kvRepo := repository.NewKVRepository(global.BaseKVPath, global.Env.CFToken)
+	baseURL := fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%v/storage/kv/namespaces/%v", global.Env.CFAccountId, global.Env.KvNamespaceId)
+
+	kvRepo := repository.NewKVRepository(baseURL, global.Env.CFToken)
 	kvService := service.NewKVService(kvRepo)
 	ctr := controller.RedirectController{KVService: kvService}
 
