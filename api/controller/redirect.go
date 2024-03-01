@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/XxThunderBlast/thunder-api/domain"
+	"github.com/XxThunderBlast/thunder-api/internal/model"
 	"github.com/gofiber/fiber/v2"
 	"net/http"
 )
@@ -16,9 +17,7 @@ func (r *RedirectController) Redirect() fiber.Handler {
 
 		value, err := r.KVService.GetValue(key)
 		if err != nil {
-			return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-				"error": err,
-			})
+			return c.Status(http.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{Error: err.Error(), Success: false})
 		}
 
 		return c.Status(http.StatusOK).Redirect(value)

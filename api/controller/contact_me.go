@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/XxThunderBlast/thunder-api/domain"
+	"github.com/XxThunderBlast/thunder-api/internal/model"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -14,19 +15,22 @@ func (cm *ContactMeController) ContactMe() fiber.Handler {
 		var m domain.Message
 
 		if err := c.BodyParser(&m); err != nil {
-			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-				"message": "Invalid request",
+			return c.Status(fiber.StatusBadRequest).JSON(model.WebResponse[model.ErrorResponse]{
+				Error:   err.Error(),
+				Success: false,
 			})
 		}
 
 		if err := cm.ContactMeService.SendMail(m); err != nil {
-			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-				"error": err,
+			return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[model.ErrorResponse]{
+				Error:   err.Error(),
+				Success: false,
 			})
 		}
 
-		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"message": "Mail sent successfully",
+		return c.Status(fiber.StatusOK).JSON(model.WebResponse[*model.SuccessResponse]{
+			Data:    &model.SuccessResponse{Message: "Email sent successfully"},
+			Success: true,
 		})
 	}
 }
