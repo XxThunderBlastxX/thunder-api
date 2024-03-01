@@ -17,6 +17,8 @@ type Env struct {
 	CFTurnstileSecret string `mapstructure:"CF_TURNSTILE_SECRET"`
 	Email             string `mapstructure:"EMAIL"`
 	EmailPass         string `mapstructure:"EMAIL_PASS"`
+	MongoUri          string `mapstructure:"MONGO_URI"`
+	MongoDb           string `mapstructure:"MONGO_DB"`
 }
 
 // LoadEnv loads the environment variables from the given path

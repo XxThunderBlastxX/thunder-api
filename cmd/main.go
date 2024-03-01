@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/XxThunderBlast/thunder-api/api/routes"
+	"github.com/XxThunderBlast/thunder-api/internal/db"
 	"github.com/XxThunderBlast/thunder-api/internal/env"
 	"github.com/XxThunderBlast/thunder-api/internal/global"
 	"github.com/XxThunderBlast/thunder-api/internal/timer"
@@ -25,6 +26,12 @@ func init() {
 	}
 
 	global.BaseKVPath = fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%v/storage/kv/namespaces/%v", global.Env.CFAccountId, global.Env.KvNamespaceId)
+
+	if mongoDb, err := db.ConnectMongo(); err != nil {
+		log.Fatal(err)
+	} else {
+		global.Db = mongoDb
+	}
 }
 
 func main() {
