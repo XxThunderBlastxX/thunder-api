@@ -1,10 +1,12 @@
 package controller
 
 import (
+	"strings"
+
+	"github.com/gofiber/fiber/v2"
+
 	"github.com/XxThunderBlast/thunder-api/domain"
 	"github.com/XxThunderBlast/thunder-api/internal/model"
-	"github.com/gofiber/fiber/v2"
-	"strings"
 )
 
 type KVController struct {

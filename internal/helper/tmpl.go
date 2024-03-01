@@ -3,9 +3,10 @@ package helper
 import (
 	"bytes"
 	"errors"
-	"github.com/XxThunderBlast/thunder-api/domain"
 	"html/template"
 	"os"
+
+	"github.com/XxThunderBlast/thunder-api/domain"
 )
 
 func BuildEmailTmpl(m domain.Message, tmplPath string) (buff bytes.Buffer, err error) {

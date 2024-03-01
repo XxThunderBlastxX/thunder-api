@@ -1,8 +1,9 @@
 package timer
 
 import (
-	"github.com/XxThunderBlast/thunder-api/internal/global"
 	"time"
+
+	"github.com/XxThunderBlast/thunder-api/internal/global"
 )
 
 func InitTimer() {

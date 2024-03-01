@@ -1,15 +1,17 @@
 package main
 
 import (
+	"log"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+
 	"github.com/XxThunderBlast/thunder-api/api/routes"
 	"github.com/XxThunderBlast/thunder-api/internal/db"
 	"github.com/XxThunderBlast/thunder-api/internal/env"
 	"github.com/XxThunderBlast/thunder-api/internal/global"
 	"github.com/XxThunderBlast/thunder-api/internal/timer"
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/logger"
-	"log"
 )
 
 func init() {

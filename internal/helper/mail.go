@@ -1,9 +1,10 @@
 package helper
 
 import (
+	"net/smtp"
+
 	"github.com/XxThunderBlast/thunder-api/domain"
 	"github.com/XxThunderBlast/thunder-api/internal/global"
-	"net/smtp"
 )
 
 func SendMail(msg domain.Message, receiverEmail ...string) error {

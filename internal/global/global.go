@@ -1,9 +1,11 @@
 package global
 
 import (
-	"github.com/XxThunderBlast/thunder-api/internal/env"
-	"go.mongodb.org/mongo-driver/mongo"
 	"time"
+
+	"go.mongodb.org/mongo-driver/mongo"
+
+	"github.com/XxThunderBlast/thunder-api/internal/env"
 )
 
 var (

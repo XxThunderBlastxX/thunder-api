@@ -2,9 +2,10 @@ package env
 
 import (
 	"errors"
+	"strings"
+
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
-	"strings"
 )
 
 // Env is a struct that holds the environment variables

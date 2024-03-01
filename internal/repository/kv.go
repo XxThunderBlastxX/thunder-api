@@ -2,10 +2,12 @@ package repository
 
 import (
 	"errors"
-	"github.com/XxThunderBlast/thunder-api/domain"
-	"github.com/XxThunderBlast/thunder-api/internal/model"
+
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
+
+	"github.com/XxThunderBlast/thunder-api/domain"
+	"github.com/XxThunderBlast/thunder-api/internal/model"
 )
 
 type kvRepository struct {

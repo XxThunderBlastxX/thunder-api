@@ -1,10 +1,11 @@
 package routes
 
 import (
+	"github.com/gofiber/fiber/v2"
+
 	"github.com/XxThunderBlast/thunder-api/api/controller"
 	"github.com/XxThunderBlast/thunder-api/api/middleware"
 	"github.com/XxThunderBlast/thunder-api/internal/service"
-	"github.com/gofiber/fiber/v2"
 )
 
 func ContactMeRouter(router fiber.Router) {

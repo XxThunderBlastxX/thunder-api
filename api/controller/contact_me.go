@@ -1,9 +1,10 @@
 package controller
 
 import (
+	"github.com/gofiber/fiber/v2"
+
 	"github.com/XxThunderBlast/thunder-api/domain"
 	"github.com/XxThunderBlast/thunder-api/internal/model"
-	"github.com/gofiber/fiber/v2"
 )
 
 type ContactMeController struct {

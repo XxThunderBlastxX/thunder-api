@@ -2,10 +2,12 @@ package db
 
 import (
 	"context"
-	"github.com/XxThunderBlast/thunder-api/internal/global"
+
 	"github.com/gofiber/fiber/v2/log"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+
+	"github.com/XxThunderBlast/thunder-api/internal/global"
 )
 
 func ConnectMongo() (*mongo.Database, error) {

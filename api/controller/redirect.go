@@ -1,10 +1,12 @@
 package controller
 
 import (
+	"net/http"
+
+	"github.com/gofiber/fiber/v2"
+
 	"github.com/XxThunderBlast/thunder-api/domain"
 	"github.com/XxThunderBlast/thunder-api/internal/model"
-	"github.com/gofiber/fiber/v2"
-	"net/http"
 )
 
 type RedirectController struct {
