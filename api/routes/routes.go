@@ -13,4 +13,5 @@ func SetupRoutes(app *fiber.App) {
 	//Private Routes (Requires Authorization to access these routes)
 	privateRouter := app.Group("/")
 	KVRouter(privateRouter)
+	ContactMeRouter(privateRouter)
 }

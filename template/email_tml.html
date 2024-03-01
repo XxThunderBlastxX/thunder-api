@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <style type="text/css" >
+        body {
+            margin: 0;
+            background-color: #cccccc;
+            line-height: 1.20;
+        }
+        table {
+            border-spacing: 0;
+        }
+        td {
+            padding: 0;
+        }
+        img {
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+
+<center class="wrapper" style="width: 100%;
+        table-layout: fixed;
+        background-color: #cccccc;
+        padding-bottom: 60px;">
+    <table class="main" style="width: 100%;
+		background-color: #ffffff;
+		max-width: 600px;
+		margin: 0 auto;
+		border-spacing: 0;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		color: #171a1b;
+		font-size: 16px;" width="100%">
+
+        <!-- TOP BORDER -->
+        <tr>
+            <td height="10" style="background-color: #171a1b;"></td>
+        </tr>
+
+
+        <!-- LOGO SECTION -->
+
+        <tr>
+            <td>
+                <table width ="100%">
+                    <tr>
+                        <td>
+                            <table>
+                                <a href="https://koustav.dev" style="display: flex; padding: 8px; text-decoration: none;">
+                                    <img alt="koustav-logo" height="65" src="https://koustav.dev/favicon.ico" style="padding-right: 8px; border-radius: 9999px" width="65">
+                                    <h2 style="color:#171a1b">A New message from {{.Name}}</h2>
+                                </a>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+        <!-- Main Body -->
+        <tr>
+            <td>
+                <table width="100%">
+                    <hr style="max-width: 560px; border-top: 1px solid #bbb;">
+                    <div style="padding: 12px ;">
+                        <h4>Name : <span style="font-weight: normal">{{.Name}}</span></h4>
+                        <h4>Email : <span style="font-weight: normal">{{.Email}}</span></h4>
+
+                        <h4>Message :</h4>
+                        <p>{{.Message}}</p>
+                    </div>
+                </table>
+            </td>
+        </tr>
+        <!-- FOOTER SECTION -->
+        <tr>
+            <td style="text-align: center">
+                <p>Made with ❤️ by <a href="https://koustav.dev" rel="noreferrer" target="_blank">Koustav Mondal</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td height="10" style="background-color: #171a1b;"></td>
+        </tr>
+    </table>
+</center>
+</body>
+</html>

@@ -8,10 +8,13 @@ import (
 // Env is a struct that holds the environment variables
 // for the application
 type Env struct {
-	APIPort       string `mapstructure:"PORT"`
-	CFToken       string `mapstructure:"CF_TOKEN"`
-	CFAccountId   string `mapstructure:"CF_ID"`
-	KvNamespaceId string `mapstructure:"KV_NAMESPACE_ID"`
+	APIPort           string `mapstructure:"PORT"`
+	CFToken           string `mapstructure:"CF_TOKEN"`
+	CFAccountId       string `mapstructure:"CF_ID"`
+	KvNamespaceId     string `mapstructure:"KV_NAMESPACE_ID"`
+	CFTurnstileSecret string `mapstructure:"CF_TURNSTILE_SECRET"`
+	Email             string `mapstructure:"EMAIL"`
+	EmailPass         string `mapstructure:"EMAIL_PASS"`
 }
 
 // LoadEnv loads the environment variables from the given path
