@@ -1,8 +1,10 @@
 package env
 
 import (
+	"errors"
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
+	"strings"
 )
 
 // Env is a struct that holds the environment variables
@@ -27,6 +29,13 @@ func LoadEnv(path string) (env Env, err error) {
 
 	if err := viper.ReadInConfig(); err != nil {
 		return env, err
+	}
+
+	// Just a validation check
+	for _, key := range viper.AllKeys() {
+		if viper.Get(key) == "" {
+			return env, errors.New("Environment variable " + strings.ToUpper(key) + " is empty")
+		}
 	}
 
 	if err := viper.Unmarshal(&env, func(config *mapstructure.DecoderConfig) {
