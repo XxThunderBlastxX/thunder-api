@@ -3,7 +3,7 @@ package repository
 import (
 	"errors"
 	"github.com/XxThunderBlast/thunder-api/domain"
-	"github.com/XxThunderBlast/thunder-api/types"
+	"github.com/XxThunderBlast/thunder-api/internal/model"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 )
@@ -45,7 +45,7 @@ func (kv *kvRepository) SetKeyValue(key string, value string) error {
 
 	reqURl := kv.BaseUrl + "/bulk"
 
-	reqBody := []types.KVRequest{
+	reqBody := []model.KVRequest{
 		{
 			Base64: false,
 			Key:    key,

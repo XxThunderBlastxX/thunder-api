@@ -1,4 +1,4 @@
-package domain
+package model
 
 type CFTurnstileToken struct {
 	Secret   string `json:"secret"`

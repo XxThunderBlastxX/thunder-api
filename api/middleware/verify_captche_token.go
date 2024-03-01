@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"github.com/XxThunderBlast/thunder-api/domain"
 	"github.com/XxThunderBlast/thunder-api/internal/global"
+	"github.com/XxThunderBlast/thunder-api/internal/model"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 )
@@ -15,7 +15,7 @@ func VerifyCaptchaToken() fiber.Handler {
 		token := c.Get("cf-turnstile-response")
 
 		// Data to be sent to Cloudflare API
-		req := domain.CFTurnstileToken{
+		req := model.CFTurnstileToken{
 			Secret:   global.Env.CFTurnstileSecret,
 			Response: token,
 			RemoteIp: c.IP(),
@@ -23,8 +23,9 @@ func VerifyCaptchaToken() fiber.Handler {
 
 		jsonData, err := json.Marshal(req)
 		if err != nil {
-			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-				"message": "Error marshalling token",
+			return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{
+				Error:   "Error while marshaling token: " + err.Error(),
+				Success: false,
 			})
 		}
 
@@ -34,14 +35,16 @@ func VerifyCaptchaToken() fiber.Handler {
 
 		statusCode, _, resErr := agent.Bytes()
 		if resErr != nil {
-			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-				"message": "Error while verifying token: ",
+			return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{
+				Error:   "Error while sending request to Cloudflare: " + resErr[0].Error(),
+				Success: false,
 			})
 		}
 
 		if statusCode != 200 {
-			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-				"message": "Invalid token",
+			return c.Status(fiber.StatusUnauthorized).JSON(model.WebResponse[*model.ErrorResponse]{
+				Error:   "Invalid token",
+				Success: false,
 			})
 		}
 
