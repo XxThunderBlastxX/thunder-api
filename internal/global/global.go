@@ -13,5 +13,5 @@ var (
 
 	Env env.Env
 
-	Db *mongo.Database
+	DB *mongo.Database
 )

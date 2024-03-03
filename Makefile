@@ -47,8 +47,8 @@ tidy:
 ## lint: run linter
 .PHONY: lint
 lint:
-    @echo "Linting..."
-    @golangci-lint run
+	@echo "Linting..."
+	@golangci-lint run
 
 # ==================================================================================== #
 # HELPERS

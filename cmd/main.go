@@ -30,7 +30,7 @@ func init() {
 	if mongoDb, err := db.ConnectMongo(); err != nil {
 		log.Fatal(err)
 	} else {
-		global.Db = mongoDb
+		global.DB = mongoDb
 	}
 }
 

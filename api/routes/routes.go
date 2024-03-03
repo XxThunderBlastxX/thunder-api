@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	kvBaseUrl = fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%v/storage/kv/namespaces/%v", global.Env.CFAccountId, global.Env.KvNamespaceId)
+	kvBaseURL = fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%v/storage/kv/namespaces/%v", global.Env.CFAccountID, global.Env.KvNamespaceID)
 )
 
 func SetupRoutes(app *fiber.App) {
@@ -18,7 +18,7 @@ func SetupRoutes(app *fiber.App) {
 	AppRouter(publicRouter)
 	RedirectRouter(publicRouter)
 
-	//Private Routes (Requires Authorization to access these routes)
+	// Private Routes (Requires Authorization to access these routes)
 	privateRouter := app.Group("/")
 	KVRouter(privateRouter)
 	ContactMeRouter(privateRouter)

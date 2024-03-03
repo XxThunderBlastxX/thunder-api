@@ -13,13 +13,13 @@ import (
 type Env struct {
 	APIPort           string `mapstructure:"PORT"`
 	CFToken           string `mapstructure:"CF_TOKEN"`
-	CFAccountId       string `mapstructure:"CF_ID"`
-	KvNamespaceId     string `mapstructure:"KV_NAMESPACE_ID"`
+	CFAccountID       string `mapstructure:"CF_ID"`
+	KvNamespaceID     string `mapstructure:"KV_NAMESPACE_ID"`
 	CFTurnstileSecret string `mapstructure:"CF_TURNSTILE_SECRET"`
 	Email             string `mapstructure:"EMAIL"`
 	EmailPass         string `mapstructure:"EMAIL_PASS"`
-	MongoUri          string `mapstructure:"MONGO_URI"`
-	MongoDb           string `mapstructure:"MONGO_DB"`
+	MongoURI          string `mapstructure:"MONGO_URI"`
+	MongoDB           string `mapstructure:"MONGO_DB"`
 }
 
 // LoadEnv loads the environment variables from the given path
