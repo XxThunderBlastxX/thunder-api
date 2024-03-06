@@ -5,8 +5,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 
-	"github.com/XxThunderBlast/thunder-api/domain"
-	"github.com/XxThunderBlast/thunder-api/internal/model"
+	"github.com/XxThunderBlastxX/thunder-api/domain"
+	"github.com/XxThunderBlastxX/thunder-api/internal/model"
 )
 
 type RedirectController struct {

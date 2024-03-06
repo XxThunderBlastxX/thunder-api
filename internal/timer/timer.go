@@ -3,7 +3,7 @@ package timer
 import (
 	"time"
 
-	"github.com/XxThunderBlast/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/global"
 )
 
 func InitTimer() {

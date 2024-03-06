@@ -7,7 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
-	"github.com/XxThunderBlast/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/global"
 )
 
 func ConnectMongo() (*mongo.Database, error) {

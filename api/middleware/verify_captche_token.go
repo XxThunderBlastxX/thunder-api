@@ -4,8 +4,8 @@ import (
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 
-	"github.com/XxThunderBlast/thunder-api/internal/global"
-	"github.com/XxThunderBlast/thunder-api/internal/model"
+	"github.com/XxThunderBlastxX/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/model"
 )
 
 func VerifyCaptchaToken() fiber.Handler {

@@ -3,10 +3,10 @@ package routes
 import (
 	"github.com/gofiber/fiber/v2"
 
-	"github.com/XxThunderBlast/thunder-api/api/controller"
-	"github.com/XxThunderBlast/thunder-api/internal/global"
-	"github.com/XxThunderBlast/thunder-api/internal/repository"
-	"github.com/XxThunderBlast/thunder-api/internal/service"
+	"github.com/XxThunderBlastxX/thunder-api/api/controller"
+	"github.com/XxThunderBlastxX/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/repository"
+	"github.com/XxThunderBlastxX/thunder-api/internal/service"
 )
 
 func RedirectRouter(router fiber.Router) {

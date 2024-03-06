@@ -4,9 +4,9 @@ package appconfig
 import (
 	"context"
 
-	"github.com/XxThunderBlast/thunder-api/internal/gen/cloudflareconfig"
-	"github.com/XxThunderBlast/thunder-api/internal/gen/databaseconfig"
-	"github.com/XxThunderBlast/thunder-api/internal/gen/smtpconfig"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/cloudflareconfig"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/databaseconfig"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/smtpconfig"
 	"github.com/apple/pkl-go/pkl"
 )
 

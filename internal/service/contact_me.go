@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/XxThunderBlast/thunder-api/domain"
-	"github.com/XxThunderBlast/thunder-api/internal/helper"
+	"github.com/XxThunderBlastxX/thunder-api/domain"
+	"github.com/XxThunderBlastxX/thunder-api/internal/helper"
 )
 
 type contactMeService struct{}

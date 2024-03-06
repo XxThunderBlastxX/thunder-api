@@ -1,4 +1,4 @@
-@go.Package{ name = "github.com/XxThunderBlast/thunder-api/internal/gen/appconfig" }
+@go.Package{ name = "github.com/XxThunderBlastxX/thunder-api/internal/gen/appconfig" }
 
 module thunderblast.thunderapi.AppConfig
 

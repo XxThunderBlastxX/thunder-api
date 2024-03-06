@@ -8,11 +8,11 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 
-	"github.com/XxThunderBlast/thunder-api/api/routes"
-	"github.com/XxThunderBlast/thunder-api/internal/db"
-	"github.com/XxThunderBlast/thunder-api/internal/gen/appconfig"
-	"github.com/XxThunderBlast/thunder-api/internal/global"
-	"github.com/XxThunderBlast/thunder-api/internal/timer"
+	"github.com/XxThunderBlastxX/thunder-api/api/routes"
+	"github.com/XxThunderBlastxX/thunder-api/internal/db"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/appconfig"
+	"github.com/XxThunderBlastxX/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/timer"
 )
 
 func init() {

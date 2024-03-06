@@ -5,7 +5,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 
-	"github.com/XxThunderBlast/thunder-api/internal/gen/appconfig"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/appconfig"
 )
 
 var (

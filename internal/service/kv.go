@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/XxThunderBlast/thunder-api/domain"
+	"github.com/XxThunderBlastxX/thunder-api/domain"
 )
 
 type kvService struct {

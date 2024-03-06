@@ -1,4 +1,4 @@
-@go.Package{ name = "github.com/XxThunderBlast/thunder-api/internal/gen/databaseconfig"}
+@go.Package{ name = "github.com/XxThunderBlastxX/thunder-api/internal/gen/databaseconfig"}
 module thunderblast.thunderapi.DatabaseConfig
 
 import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.5.3#/go.pkl"

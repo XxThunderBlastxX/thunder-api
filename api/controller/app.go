@@ -3,8 +3,8 @@ package controller
 import (
 	"github.com/gofiber/fiber/v2"
 
-	"github.com/XxThunderBlast/thunder-api/internal/global"
-	"github.com/XxThunderBlast/thunder-api/internal/timer"
+	"github.com/XxThunderBlastxX/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/timer"
 )
 
 func AppController() fiber.Handler {
