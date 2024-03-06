@@ -1,0 +1,22 @@
+@go.Package{ name = "github.com/XxThunderBlast/thunder-api/internal/gen/appconfig" }
+
+module thunderblast.thunderapi.AppConfig
+
+import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.5.3#/go.pkl"
+import "DatabaseConfig.pkl"
+import "SMTPConfig.pkl"
+import "CloudflareConfig.pkl"
+
+
+name : String = "thunder-api"
+version : String = "0.1.0"
+
+port : String = "8080"
+
+db : DatabaseConfig
+
+smtp : SMTPConfig
+
+cloudflare : CloudflareConfig
+
+

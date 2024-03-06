@@ -1,0 +1,23 @@
+amends "AppConfig.pkl"
+
+db {
+  dbName = ""
+  host = ""
+}
+
+
+
+cloudflare {
+  accountID = ""
+  kvNamespaceID = ""
+  token = ""
+  turnstileSecret = ""
+}
+
+smtp {
+  host = ""
+  port = ""
+  user = ""
+  password = ""
+}
+

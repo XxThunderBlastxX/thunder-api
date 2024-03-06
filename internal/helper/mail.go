@@ -9,12 +9,12 @@ import (
 
 func SendMail(msg domain.Message, receiverEmail ...string) error {
 	// Email credentials
-	senderEmail := global.Env.Email
-	mailPass := global.Env.EmailPass
+	senderEmail := global.Config.Smtp.User
+	mailPass := global.Config.Smtp.Password
 
 	// SMTP server configuration.
-	smtpHost := "smtp.zoho.in"
-	smtpPort := "587"
+	smtpHost := global.Config.Smtp.Host
+	smtpPort := global.Config.Smtp.Port
 
 	// MIME type
 	mime := "Content-Type: text/html; charset=UTF-8\r\n\r\n"

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -9,7 +10,7 @@ import (
 
 	"github.com/XxThunderBlast/thunder-api/api/routes"
 	"github.com/XxThunderBlast/thunder-api/internal/db"
-	"github.com/XxThunderBlast/thunder-api/internal/env"
+	"github.com/XxThunderBlast/thunder-api/internal/gen/appconfig"
 	"github.com/XxThunderBlast/thunder-api/internal/global"
 	"github.com/XxThunderBlast/thunder-api/internal/timer"
 )
@@ -18,12 +19,11 @@ func init() {
 	// Initialize the global timer for our application
 	timer.InitTimer()
 
-	// Load the environment variables
-	if loadEnv, err := env.LoadEnv("."); err != nil {
+	// Load the application configuration
+	if config, err := appconfig.LoadFromPath(context.TODO(), "internal/config/config.pkl"); err != nil {
 		log.Fatal(err)
-		return
 	} else {
-		global.Env = loadEnv
+		global.Config = config
 	}
 
 	// Connect to MongoDB
@@ -32,6 +32,7 @@ func init() {
 	} else {
 		global.DB = mongoDb
 	}
+
 }
 
 func main() {
@@ -47,7 +48,7 @@ func main() {
 
 	routes.SetupRoutes(app)
 
-	if err := app.Listen(":" + global.Env.APIPort); err != nil {
+	if err := app.Listen(":" + global.Config.Port); err != nil {
 		log.Fatal(err)
 	}
 }

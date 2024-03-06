@@ -1,15 +1,15 @@
 package routes
 
 import (
-	"fmt"
-
 	"github.com/gofiber/fiber/v2"
-
-	"github.com/XxThunderBlast/thunder-api/internal/global"
 )
 
+/* TODO : Need to fix this variable
+ * Error: panic: runtime error: invalid memory address or nil pointer dereference
+ */
 var (
-	kvBaseURL = fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%v/storage/kv/namespaces/%v", global.Env.CFAccountID, global.Env.KvNamespaceID)
+	//kvBaseURL = fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%s/storage/kv/namespaces/%s", global.Config.Cloudflare.AccountID, global.Config.Cloudflare.KvNamespaceID)
+	kvBaseURL = ""
 )
 
 func SetupRoutes(app *fiber.App) {

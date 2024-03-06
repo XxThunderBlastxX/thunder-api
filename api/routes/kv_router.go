@@ -10,7 +10,7 @@ import (
 )
 
 func KVRouter(router fiber.Router) {
-	kvRepo := repository.NewKVRepository(kvBaseURL, global.Env.CFToken)
+	kvRepo := repository.NewKVRepository(kvBaseURL, global.Config.Cloudflare.Token)
 	kvService := service.NewKVService(kvRepo)
 	ctr := controller.KVController{KVService: kvService}
 

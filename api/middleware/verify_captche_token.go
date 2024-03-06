@@ -17,7 +17,7 @@ func VerifyCaptchaToken() fiber.Handler {
 
 		// Data to be sent to Cloudflare API
 		req := model.CFTurnstileToken{
-			Secret:   global.Env.CFTurnstileSecret,
+			Secret:   global.Config.Cloudflare.TurnstileSecret,
 			Response: token,
 			RemoteIp: c.IP(),
 		}

@@ -1,0 +1,12 @@
+@go.Package{ name = "github.com/XxThunderBlast/thunder-api/internal/gen/smtpconfig"}
+module thunderblast.thunderapi.SMTPConfig
+
+import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.5.3#/go.pkl"
+
+host: String
+
+port: String
+
+user : String
+
+password: String

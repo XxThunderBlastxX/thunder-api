@@ -12,13 +12,12 @@ import (
 
 func ConnectMongo() (*mongo.Database, error) {
 	// Connect to MongoDB
-	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(global.Env.MongoURI))
+	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(global.Config.Db.Host))
 	if err != nil {
 		return nil, err
 	}
 	log.Info("🌐Connected to MongoDB!")
 
-	db := client.Database(global.Env.MongoDB)
-
+	db := client.Database(global.Config.Db.DbName)
 	return db, nil
 }
