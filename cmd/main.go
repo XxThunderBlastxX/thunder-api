@@ -6,8 +6,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/logger"
 
+	"github.com/XxThunderBlastxX/thunder-api/api/middleware"
 	"github.com/XxThunderBlastxX/thunder-api/api/routes"
 	"github.com/XxThunderBlastxX/thunder-api/internal/db"
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/appconfig"
@@ -39,12 +39,8 @@ func main() {
 	app := fiber.New()
 
 	app.Use(cors.New())
-
-	app.Use(logger.New(logger.Config{
-		Format:        "PID-${pid} ${locals:requestid} ${status} - ${method} ${path}\n",
-		TimeZone:      "Asia/Kolkata",
-		DisableColors: false,
-	}))
+	app.Use(middleware.RateLimiter())
+	app.Use(middleware.RequestLogger())
 
 	routes.SetupRoutes(app)
 
