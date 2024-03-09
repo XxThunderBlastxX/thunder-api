@@ -3,12 +3,12 @@ module thunderblast.thunderapi.CloudflareConfig
 
 import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.5.3#/go.pkl"
 
-accountID : String
+accountID : String(!isEmpty)
 
-kvNamespaceID : String
+kvNamespaceID : String(!isEmpty)
 
-token : String
+token : String(!isEmpty)
 
-turnstileSecret : String
+turnstileSecret : String(!isEmpty)
 
 

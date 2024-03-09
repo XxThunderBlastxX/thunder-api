@@ -3,12 +3,12 @@ module thunderblast.thunderapi.KeycloakConfig
 
 import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.5.3#/go.pkl"
 
-realm: String
+realm: String(!isEmpty)
 
-authUrl: String
+authUrl: String(!isEmpty, startsWith("https://"))
 
-clientId: String
+clientId: String(!isEmpty)
 
-clientSecret: String
+clientSecret: String(!isEmpty)
 
-realmRSA256PublicKey: String
+realmRSA256PublicKey: String(!isEmpty)

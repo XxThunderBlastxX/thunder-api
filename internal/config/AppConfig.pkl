@@ -9,10 +9,10 @@ import "CloudflareConfig.pkl"
 import "KeycloakConfig.pkl"
 
 
-name : String = "thunder-api"
-version : String = "0.1.0"
+name : String(!isEmpty) = "thunder-api"
+version : String(Regex(#"\d\.\d\.\d"#)) = "0.4.0"
 
-port : String
+port : String(!isEmpty)
 
 db : DatabaseConfig
 

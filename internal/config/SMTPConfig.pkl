@@ -3,10 +3,10 @@ module thunderblast.thunderapi.SMTPConfig
 
 import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.5.3#/go.pkl"
 
-host: String
+host: String(!isEmpty)
 
-port: String
+port: String(!isEmpty)
 
-user : String
+user : String(!isEmpty)
 
-password: String
+password: String(!isEmpty)

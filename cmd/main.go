@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	config *appConfig.AppConfig
+	config *appConfig.AppConfig //nolint:gochecknoglobals
 )
 
 func init() {
