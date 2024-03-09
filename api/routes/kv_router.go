@@ -9,7 +9,7 @@ import (
 	"github.com/XxThunderBlastxX/thunder-api/internal/service"
 )
 
-func KVRouter(router fiber.Router) {
+func KVRouter(router fiber.Router, kvBaseURL string) {
 	kvRepo := repository.NewKVRepository(kvBaseURL, global.Config.Cloudflare.Token)
 	kvService := service.NewKVService(kvRepo)
 	ctr := controller.KVController{KVService: kvService}

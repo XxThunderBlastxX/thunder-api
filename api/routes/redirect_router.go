@@ -9,7 +9,7 @@ import (
 	"github.com/XxThunderBlastxX/thunder-api/internal/service"
 )
 
-func RedirectRouter(router fiber.Router) {
+func RedirectRouter(router fiber.Router, kvBaseURL string) {
 	kvRepo := repository.NewKVRepository(kvBaseURL, global.Config.Cloudflare.Token)
 	kvService := service.NewKVService(kvRepo)
 	ctr := controller.RedirectController{KVService: kvService}

@@ -5,11 +5,10 @@ import (
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/base64"
-	"fmt"
 
 	contribJwt "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2"
-	golangJwt "github.com/golang-jwt/jwt/v4"
+	golangJwt "github.com/golang-jwt/jwt/v5"
 	"github.com/pkg/errors"
 
 	"github.com/XxThunderBlastxX/thunder-api/domain"
@@ -19,8 +18,6 @@ import (
 )
 
 func NewJWTMiddleware(keycloakService domain.KeycloakService) fiber.Handler {
-	fmt.Println(global.Config.Keycloak.RealmRSA256PublicKey)
-
 	publicKey, err := parseKeycloakPublicKey(global.Config.Keycloak.RealmRSA256PublicKey)
 	if err != nil {
 		panic(err)
