@@ -4,13 +4,13 @@ import (
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/XxThunderBlastxX/thunder-api/api/controller"
-	"github.com/XxThunderBlastxX/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/cloudflareconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/repository"
 	"github.com/XxThunderBlastxX/thunder-api/internal/service"
 )
 
-func KVRouter(router fiber.Router, kvBaseURL string) {
-	kvRepo := repository.NewKVRepository(kvBaseURL, global.Config.Cloudflare.Token)
+func KVRouter(router fiber.Router, kvBaseURL string, cfConfig *cloudflareconfig.CloudflareConfig) {
+	kvRepo := repository.NewKVRepository(kvBaseURL, cfConfig.Token)
 	kvService := service.NewKVService(kvRepo)
 	ctr := controller.KVController{KVService: kvService}
 

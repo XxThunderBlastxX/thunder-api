@@ -21,8 +21,7 @@ linters:
     - unparam
     - unused
     - structcheck
+    - gochecknoglobals
     - deadcode
-
   disable:
-    - gochecknoglobals # TODO: need to move to enable after refactoring the current global variables
     - gochecknoinits # TODO: need to move to enable after refactoring the current init functions

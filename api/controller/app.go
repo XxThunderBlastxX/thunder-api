@@ -1,23 +1,22 @@
 package controller
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"time"
 
-	"github.com/XxThunderBlastxX/thunder-api/internal/global"
-	"github.com/XxThunderBlastxX/thunder-api/internal/timer"
+	"github.com/gofiber/fiber/v2"
 )
 
-func AppController() fiber.Handler {
+func AppController(appTimer *time.Time) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"status":  "OK",
 			"app":     "Thunder-API",
 			"version": "1.0.0",
 			"uptime": fiber.Map{
-				"start": global.Timer,
-				"hr":    timer.TimeElapsedHR(),
-				"min":   timer.TimeElapsedMin(),
-				"sec":   timer.TimeElapsedSec(),
+				"start": appTimer,
+				"hr":    time.Since(*appTimer).Hours(),
+				"min":   time.Since(*appTimer).Minutes(),
+				"sec":   time.Since(*appTimer).Seconds(),
 			},
 		})
 	}

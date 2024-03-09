@@ -19,7 +19,7 @@ func RateLimiter() fiber.Handler {
 		LimitReached: func(c *fiber.Ctx) error {
 			return c.Status(fiber.StatusTooManyRequests).JSON(model.WebResponse[*model.ErrorResponse]{
 				Success: false,
-				Error:   "Rate limit exceeded",
+				Error:   "rate limit exceeded",
 			})
 		},
 		LimiterMiddleware: limiter.SlidingWindow{},

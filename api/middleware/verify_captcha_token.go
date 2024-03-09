@@ -4,11 +4,11 @@ import (
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 
-	"github.com/XxThunderBlastxX/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/cloudflareconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/model"
 )
 
-func VerifyCaptchaToken() fiber.Handler {
+func VerifyCaptchaToken(cfConfig *cloudflareconfig.CloudflareConfig) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		reqUrl := "https://challenges.cloudflare.com/turnstile/v0/siteverify"
 
@@ -17,7 +17,7 @@ func VerifyCaptchaToken() fiber.Handler {
 
 		// Data to be sent to Cloudflare API
 		req := model.CFTurnstileToken{
-			Secret:   global.Config.Cloudflare.TurnstileSecret,
+			Secret:   cfConfig.TurnstileSecret,
 			Response: token,
 			RemoteIp: c.IP(),
 		}

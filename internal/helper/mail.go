@@ -4,17 +4,17 @@ import (
 	"net/smtp"
 
 	"github.com/XxThunderBlastxX/thunder-api/domain"
-	"github.com/XxThunderBlastxX/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/smtpconfig"
 )
 
-func SendMail(msg domain.Message, receiverEmail ...string) error {
+func SendMail(msg domain.Message, smtpConfig *smtpconfig.SMTPConfig, receiverEmail ...string) error {
 	// Email credentials
-	senderEmail := global.Config.Smtp.User
-	mailPass := global.Config.Smtp.Password
+	senderEmail := smtpConfig.User
+	mailPass := smtpConfig.Password
 
 	// SMTP server configuration.
-	smtpHost := global.Config.Smtp.Host
-	smtpPort := global.Config.Smtp.Port
+	smtpHost := smtpConfig.Host
+	smtpPort := smtpConfig.Port
 
 	// MIME type
 	mime := "Content-Type: text/html; charset=UTF-8\r\n\r\n"

@@ -5,18 +5,19 @@ import (
 
 	"github.com/XxThunderBlastxX/thunder-api/api/controller"
 	"github.com/XxThunderBlastxX/thunder-api/api/middleware"
+	appConfig "github.com/XxThunderBlastxX/thunder-api/internal/config"
 	"github.com/XxThunderBlastxX/thunder-api/internal/service"
 )
 
-func ContactMeRouter(router fiber.Router) {
-	contactMeService := service.NewContactMeService()
+func ContactMeRouter(router fiber.Router, config *appConfig.AppConfig) {
+	contactMeService := service.NewContactMeService(config.AppConfig.Smtp)
 	ctr := controller.ContactMeController{
 		ContactMeService: contactMeService,
 	}
 	contactMeRoute := router.Group("/contact_me")
 
 	// Middleware
-	contactMeRoute.Use(middleware.VerifyCaptchaToken())
+	contactMeRoute.Use(middleware.VerifyCaptchaToken(config.AppConfig.Cloudflare))
 
 	// Routes
 	contactMeRoute.Post("/", ctr.ContactMe())

@@ -6,6 +6,7 @@ import (
 	"github.com/Nerzal/gocloak/v13"
 
 	"github.com/XxThunderBlastxX/thunder-api/domain"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/keycloakconfig"
 )
 
 type keycloakRepository struct {
@@ -15,12 +16,12 @@ type keycloakRepository struct {
 	ClientSecret string
 }
 
-func NewKeycloakRepository(authURL string, realm string, clientID string, clientSecret string) domain.KeycloakRepository {
+func NewKeycloakRepository(keycloakConfig *keycloakconfig.KeycloakConfig) domain.KeycloakRepository {
 	return &keycloakRepository{
-		AuthURL:      authURL,
-		Realm:        realm,
-		ClientID:     clientID,
-		ClientSecret: clientSecret,
+		AuthURL:      keycloakConfig.AuthUrl,
+		Realm:        keycloakConfig.Realm,
+		ClientID:     keycloakConfig.ClientId,
+		ClientSecret: keycloakConfig.ClientSecret,
 	}
 }
 

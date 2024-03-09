@@ -13,12 +13,12 @@ import (
 
 	"github.com/XxThunderBlastxX/thunder-api/domain"
 	"github.com/XxThunderBlastxX/thunder-api/internal/common/enum"
-	"github.com/XxThunderBlastxX/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/keycloakconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/model"
 )
 
-func NewJWTMiddleware(keycloakService domain.KeycloakService) fiber.Handler {
-	publicKey, err := parseKeycloakPublicKey(global.Config.Keycloak.RealmRSA256PublicKey)
+func NewJWTMiddleware(keycloakService domain.KeycloakService, keycloakConfig *keycloakconfig.KeycloakConfig) fiber.Handler {
+	publicKey, err := parseKeycloakPublicKey(keycloakConfig.RealmRSA256PublicKey)
 	if err != nil {
 		panic(err)
 	}
