@@ -11,13 +11,13 @@ import (
 	golangJwt "github.com/golang-jwt/jwt/v5"
 	"github.com/pkg/errors"
 
-	"github.com/XxThunderBlastxX/thunder-api/domain"
+	"github.com/XxThunderBlastxX/thunder-api/internal/auth"
 	"github.com/XxThunderBlastxX/thunder-api/internal/common/enum"
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/keycloakconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/model"
 )
 
-func NewJWTMiddleware(keycloakService domain.KeycloakService, keycloakConfig *keycloakconfig.KeycloakConfig) fiber.Handler {
+func NewJWTMiddleware(auth auth.Auth, keycloakConfig *keycloakconfig.KeycloakConfig) fiber.Handler {
 	publicKey, err := parseKeycloakPublicKey(keycloakConfig.RealmRSA256PublicKey)
 	if err != nil {
 		panic(err)
@@ -29,7 +29,7 @@ func NewJWTMiddleware(keycloakService domain.KeycloakService, keycloakConfig *ke
 			Key:    publicKey,
 		},
 		SuccessHandler: func(c *fiber.Ctx) error {
-			return successHandler(c, keycloakService)
+			return successHandler(c, auth)
 		},
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 			return c.Status(fiber.StatusUnauthorized).JSON(model.WebResponse[*model.ErrorResponse]{
@@ -40,7 +40,7 @@ func NewJWTMiddleware(keycloakService domain.KeycloakService, keycloakConfig *ke
 	})
 }
 
-func successHandler(c *fiber.Ctx, keycloakService domain.KeycloakService) error {
+func successHandler(c *fiber.Ctx, auth auth.Auth) error {
 	jwtToken := c.Locals("user").(*golangJwt.Token)
 	claims := jwtToken.Claims.(golangJwt.MapClaims)
 
@@ -49,7 +49,7 @@ func successHandler(c *fiber.Ctx, keycloakService domain.KeycloakService) error 
 	contextWithClaims := context.WithValue(ctx, enum.ContextKeyClaims, claims)
 	c.SetUserContext(contextWithClaims)
 
-	tokenInfo, err := keycloakService.IntrospectToken(ctx, jwtToken.Raw)
+	tokenInfo, err := auth.IntrospectToken(ctx, jwtToken.Raw)
 	if err != nil {
 		panic(err)
 	}

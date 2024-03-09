@@ -10,7 +10,7 @@ import "KeycloakConfig.pkl"
 
 
 name : String(!isEmpty) = "thunder-api"
-version : String(Regex(#"\d\.\d\.\d"#)) = "0.4.0"
+version : String(matches(Regex(#"(\d\.\d\.\d)"#))) = "0.4.0"
 
 port : String(!isEmpty)
 
