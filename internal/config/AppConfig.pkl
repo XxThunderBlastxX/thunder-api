@@ -6,12 +6,13 @@ import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.5.3#/go.pkl"
 import "DatabaseConfig.pkl"
 import "SMTPConfig.pkl"
 import "CloudflareConfig.pkl"
+import "KeycloakConfig.pkl"
 
 
 name : String = "thunder-api"
 version : String = "0.1.0"
 
-port : String = "8080"
+port : String
 
 db : DatabaseConfig
 
@@ -19,4 +20,4 @@ smtp : SMTPConfig
 
 cloudflare : CloudflareConfig
 
-
+keycloak : KeycloakConfig

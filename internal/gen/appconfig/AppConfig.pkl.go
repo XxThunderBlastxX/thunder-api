@@ -6,6 +6,7 @@ import (
 
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/cloudflareconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/databaseconfig"
+	"github.com/XxThunderBlastxX/thunder-api/internal/gen/keycloakconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/smtpconfig"
 	"github.com/apple/pkl-go/pkl"
 )
@@ -22,6 +23,8 @@ type AppConfig struct {
 	Smtp *smtpconfig.SMTPConfig `pkl:"smtp"`
 
 	Cloudflare *cloudflareconfig.CloudflareConfig `pkl:"cloudflare"`
+
+	Keycloak *keycloakconfig.KeycloakConfig `pkl:"keycloak"`
 }
 
 // LoadFromPath loads the pkl module at the given path and evaluates it into a AppConfig

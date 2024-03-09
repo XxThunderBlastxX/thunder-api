@@ -2,6 +2,11 @@ package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
+
+	"github.com/XxThunderBlastxX/thunder-api/api/middleware"
+	"github.com/XxThunderBlastxX/thunder-api/internal/global"
+	"github.com/XxThunderBlastxX/thunder-api/internal/repository"
+	"github.com/XxThunderBlastxX/thunder-api/internal/service"
 )
 
 /* TODO : Need to fix this variable
@@ -17,6 +22,10 @@ func SetupRoutes(app *fiber.App) {
 	publicRouter := app.Group("/")
 	AppRouter(publicRouter)
 	RedirectRouter(publicRouter)
+
+	keycloakRepo := repository.NewKeycloakRepository(global.Config.Keycloak.AuthUrl, global.Config.Keycloak.Realm, global.Config.Keycloak.ClientId, global.Config.Keycloak.ClientSecret)
+	keycloakService := service.NewKeycloakService(keycloakRepo)
+	app.Use(middleware.NewJWTMiddleware(keycloakService))
 
 	// Private Routes (Requires Authorization to access these routes)
 	privateRouter := app.Group("/")

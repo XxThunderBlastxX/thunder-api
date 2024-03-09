@@ -1,11 +1,11 @@
 amends "AppConfig.pkl"
 
+port = ""
+
 db {
   dbName = ""
   host = ""
 }
-
-
 
 cloudflare {
   accountID = ""
@@ -21,3 +21,10 @@ smtp {
   password = ""
 }
 
+keycloak {
+  authUrl = ""
+  realm = ""
+  clientId = ""
+  clientSecret = ""
+  realmRSA256PublicKey = ""
+}
