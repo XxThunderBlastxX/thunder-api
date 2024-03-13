@@ -1,40 +1,105 @@
 package auth
 
 import (
-	"context"
+	"fmt"
+	"strings"
+	"time"
 
-	"github.com/Nerzal/gocloak/v13"
-
-	"github.com/XxThunderBlastxX/thunder-api/internal/gen/keycloakconfig"
+	"github.com/golang-jwt/jwt/v5"
+	"github.com/gookit/goutil"
 )
 
 type Auth interface {
-	IntrospectToken(ctx context.Context, token string) (*gocloak.IntroSpectTokenResult, error)
+	IsTokenActive() (bool, error)
+	IsUserInRealmRole(role string) bool
+	TokenHasScope(scope string) bool
 }
 
-type auth struct {
-	AuthURL      string
-	Realm        string
-	ClientID     string
-	ClientSecret string
+type accessToken struct {
+	claims       jwt.MapClaims
+	realmRoles   []string
+	accountRoles []string
+	scopes       []string
 }
 
-func NewAuth(keycloakConfig *keycloakconfig.KeycloakConfig) Auth {
-	return &auth{
-		AuthURL:      keycloakConfig.AuthUrl,
-		Realm:        keycloakConfig.Realm,
-		ClientID:     keycloakConfig.ClientId,
-		ClientSecret: keycloakConfig.ClientSecret,
+func NewAuth(claims jwt.MapClaims) Auth {
+	return &accessToken{
+		claims:       claims,
+		realmRoles:   parseRealmRoles(claims),
+		accountRoles: parseAccountRoles(claims),
+		scopes:       parseScopes(claims),
 	}
 }
 
-func (a *auth) IntrospectToken(ctx context.Context, token string) (*gocloak.IntroSpectTokenResult, error) {
-	client := gocloak.NewClient(a.AuthURL)
-
-	tokenResult, err := client.RetrospectToken(ctx, token, a.ClientID, a.ClientSecret, a.Realm)
+// IsTokenActive checks if the token is active.
+// Returns true if the token is active, false otherwise.
+func (a *accessToken) IsTokenActive() (bool, error) {
+	timer, err := a.claims.GetExpirationTime()
 	if err != nil {
-		return nil, err
+		return false, err
+	}
+	return !timer.Time.Before(time.Now()), nil
+}
+
+func (a *accessToken) IsUserInRealmRole(role string) bool {
+	return goutil.Contains(a.realmRoles, role)
+}
+
+func (a *accessToken) TokenHasScope(scope string) bool {
+	return goutil.Contains(a.scopes, scope)
+}
+
+func parseRealmRoles(claims jwt.MapClaims) []string {
+	var realmRoles []string = make([]string, 0)
+
+	if claim, ok := claims["realm_access"]; ok {
+		if roles, ok := claim.(map[string]interface{})["roles"]; ok {
+			for _, role := range roles.([]interface{}) {
+				realmRoles = append(realmRoles, role.(string))
+			}
+		}
+	}
+	return realmRoles
+}
+
+func parseAccountRoles(claims jwt.MapClaims) []string {
+	var accountRoles []string = make([]string, 0)
+
+	if claim, ok := claims["resource_access"]; ok {
+		if acc, ok := claim.(map[string]interface{})["account"]; ok {
+			if roles, ok := acc.(map[string]interface{})["roles"]; ok {
+				for _, role := range roles.([]interface{}) {
+					accountRoles = append(accountRoles, role.(string))
+				}
+			}
+		}
+	}
+	return accountRoles
+}
+
+func parseScopes(claims jwt.MapClaims) []string {
+	scopeStr, err := parseString(claims, "scope")
+	if err != nil {
+		return make([]string, 0)
+	}
+	scopes := strings.Split(scopeStr, " ")
+	return scopes
+}
+
+func parseString(claims jwt.MapClaims, key string) (string, error) {
+	var (
+		ok  bool
+		raw interface{}
+		iss string
+	)
+	raw, ok = claims[key]
+	if !ok {
+		return "", nil
 	}
 
-	return tokenResult, nil
+	iss, ok = raw.(string)
+	if !ok {
+		return "", fmt.Errorf("key %s is invalid", key)
+	}
+	return iss, nil
 }

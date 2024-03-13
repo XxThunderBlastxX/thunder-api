@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"context"
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/base64"
@@ -12,12 +11,11 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/XxThunderBlastxX/thunder-api/internal/auth"
-	"github.com/XxThunderBlastxX/thunder-api/internal/common/enum"
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/keycloakconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/model"
 )
 
-func NewJWTMiddleware(auth auth.Auth, keycloakConfig *keycloakconfig.KeycloakConfig) fiber.Handler {
+func NewJWTMiddleware(keycloakConfig *keycloakconfig.KeycloakConfig) fiber.Handler {
 	publicKey, err := parseKeycloakPublicKey(keycloakConfig.RealmRSA256PublicKey)
 	if err != nil {
 		panic(err)
@@ -29,7 +27,7 @@ func NewJWTMiddleware(auth auth.Auth, keycloakConfig *keycloakconfig.KeycloakCon
 			Key:    publicKey,
 		},
 		SuccessHandler: func(c *fiber.Ctx) error {
-			return successHandler(c, auth)
+			return successHandler(c)
 		},
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 			return c.Status(fiber.StatusUnauthorized).JSON(model.WebResponse[*model.ErrorResponse]{
@@ -40,21 +38,19 @@ func NewJWTMiddleware(auth auth.Auth, keycloakConfig *keycloakconfig.KeycloakCon
 	})
 }
 
-func successHandler(c *fiber.Ctx, auth auth.Auth) error {
+func successHandler(c *fiber.Ctx) error {
 	jwtToken := c.Locals("user").(*golangJwt.Token)
 	claims := jwtToken.Claims.(golangJwt.MapClaims)
+	a := auth.NewAuth(claims)
 
-	ctx := c.UserContext()
-
-	contextWithClaims := context.WithValue(ctx, enum.ContextKeyClaims, claims)
-	c.SetUserContext(contextWithClaims)
-
-	tokenInfo, err := auth.IntrospectToken(ctx, jwtToken.Raw)
+	active, err := a.IsTokenActive()
 	if err != nil {
-		panic(err)
+		return c.Status(fiber.StatusUnauthorized).JSON(model.WebResponse[*model.ErrorResponse]{
+			Success: false,
+			Error:   err.Error(),
+		})
 	}
-
-	if !*tokenInfo.Active {
+	if !active {
 		return c.Status(fiber.StatusUnauthorized).JSON(model.WebResponse[*model.ErrorResponse]{
 			Success: false,
 			Error:   "token is not active",

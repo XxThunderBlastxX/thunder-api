@@ -6,7 +6,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/XxThunderBlastxX/thunder-api/api/middleware"
-	"github.com/XxThunderBlastxX/thunder-api/internal/auth"
 	"github.com/XxThunderBlastxX/thunder-api/internal/config"
 )
 
@@ -19,8 +18,7 @@ func SetupRoutes(app *fiber.App, config *config.AppConfig) {
 	RedirectRouter(publicRouter, kvBaseURL, config.AppConfig.Cloudflare)
 	ContactMeRouter(publicRouter, config)
 
-	kcAuth := auth.NewAuth(config.AppConfig.Keycloak)
-	app.Use(middleware.NewJWTMiddleware(kcAuth, config.AppConfig.Keycloak))
+	app.Use(middleware.NewJWTMiddleware(config.AppConfig.Keycloak))
 
 	// Private Routes (Requires Authorization to access these routes)
 	privateRouter := app.Group("/")
