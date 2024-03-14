@@ -1,0 +1,19 @@
+# Miscellaneous
+bin
+LICENCE
+README.md
+.gitignore
+.air.toml
+.golangci.yaml
+Makefile
+Dockerfile
+
+# JetBrains
+.idea
+
+# MacOS
+.DS_Store
+
+# Configuration
+internal/config/config.example.pkl
+

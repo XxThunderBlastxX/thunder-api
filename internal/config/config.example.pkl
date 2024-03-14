@@ -1,30 +1,30 @@
 amends "AppConfig.pkl"
 
-port = ""
+port = "port"
 
 db {
-  dbName = ""
-  host = ""
+  dbName = "dbname"
+  host = "host"
 }
 
 cloudflare {
-  accountID = ""
-  kvNamespaceID = ""
-  token = ""
-  turnstileSecret = ""
+  accountID = "id"
+  kvNamespaceID = "id"
+  token = "token"
+  turnstileSecret = "secret"
 }
 
 smtp {
-  host = ""
-  port = ""
-  user = ""
-  password = ""
+  host = "host"
+  port = "port"
+  user = "user"
+  password = "password"
 }
 
 keycloak {
-  authUrl = ""
-  realm = ""
-  clientId = ""
-  clientSecret = ""
-  realmRSA256PublicKey = ""
+  authUrl = "https://url"
+  realm = "realm"
+  clientId = "id"
+  clientSecret = "secret"
+  realmRSA256PublicKey = "key"
 }
