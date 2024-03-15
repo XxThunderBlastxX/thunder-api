@@ -20,7 +20,7 @@ func SendMail(msg domain.Message, smtpConfig *smtpconfig.SMTPConfig, receiverEma
 	mime := "Content-Type: text/html; charset=UTF-8\r\n\r\n"
 
 	// template
-	emailBody, err := BuildEmailTmpl(msg, "./template/message_tmpl.html")
+	emailBody, err := BuildEmailTmpl(msg, "./pkg/template/email.html")
 	if err != nil {
 		return err
 	}

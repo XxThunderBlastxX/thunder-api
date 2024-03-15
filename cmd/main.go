@@ -22,7 +22,7 @@ func init() {
 func main() {
 	app := fiber.New()
 
-	app.Use(cors.New(cors.Config{AllowOrigins: "https://*.koustav.dev"}))
+	app.Use(cors.New(cors.Config{}))
 	app.Use(middleware.RateLimiter())
 	app.Use(middleware.RequestLogger())
 

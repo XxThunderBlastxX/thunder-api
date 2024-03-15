@@ -17,7 +17,7 @@ func NewContactMeService(smtpConfig *smtpconfig.SMTPConfig) domain.ContactMeServ
 }
 
 func (c *contactMeService) SendMail(msg domain.Message) error {
-	if err := helper.SendMail(msg, c.smtpConfig, "koustavmondal55gmail.com", "me@koustav.dev"); err != nil {
+	if err := helper.SendMail(msg, c.smtpConfig, "koustavmondal55@gmail.com", "me@koustav.dev"); err != nil {
 		return err
 	}
 	return nil
