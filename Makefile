@@ -29,7 +29,7 @@ watch:
 	@air \
 		--build.cmd "make build" --build.bin "bin/${BINARY_NAME}" --build.delay "100" \
         --build.exclude_dir "" \
-        --build.include_ext "go, tpl, tmpl, html, css, scss, js, ts, sql, jpeg, jpg, gif, png, bmp, svg, webp, ico" \
+        --build.include_ext "go, tpl, tmpl, html, css, scss, js, ts, sql, jpeg, jpg, gif, png, bmp, svg, webp, ico, pkl" \
         --misc.clean_on_exit "true"
 
 

@@ -3,7 +3,7 @@ package helper
 import (
 	"net/smtp"
 
-	"github.com/XxThunderBlastxX/thunder-api/domain"
+	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/smtpconfig"
 )
 

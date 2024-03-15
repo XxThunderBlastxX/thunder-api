@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"go.mongodb.org/mongo-driver/mongo"
+	"gorm.io/gorm"
 
 	"github.com/XxThunderBlastxX/thunder-api/internal/db"
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/appconfig"
@@ -14,7 +14,7 @@ import (
 type AppConfig struct {
 	AppConfig *appconfig.AppConfig
 
-	Db *mongo.Database
+	Db *gorm.DB
 
 	Timer time.Time
 }
@@ -25,7 +25,12 @@ func NewAppConfig() *AppConfig {
 		log.Fatal(err)
 	}
 
-	database, err := db.ConnectMongo(config.Db)
+	//database, err := db.ConnectMongo(config.Db)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+
+	database, err := db.ConnectPostgres()
 	if err != nil {
 		log.Fatal(err)
 	}

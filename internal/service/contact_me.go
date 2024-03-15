@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/XxThunderBlastxX/thunder-api/domain"
+	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/smtpconfig"
 	"github.com/XxThunderBlastxX/thunder-api/pkg/helper"
 )

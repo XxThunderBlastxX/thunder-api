@@ -10,6 +10,7 @@ import (
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/databaseconfig"
 )
 
+// TODO: Remove this function
 func ConnectMongo(dbConfig *databaseconfig.DatabaseConfig) (*mongo.Database, error) {
 	// Connect to MongoDB
 	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(dbConfig.Host))

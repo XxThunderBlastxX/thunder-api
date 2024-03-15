@@ -6,7 +6,7 @@ import (
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 
-	"github.com/XxThunderBlastxX/thunder-api/domain"
+	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
 	"github.com/XxThunderBlastxX/thunder-api/internal/model"
 )
 

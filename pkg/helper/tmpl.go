@@ -6,7 +6,7 @@ import (
 	"html/template"
 	"os"
 
-	"github.com/XxThunderBlastxX/thunder-api/domain"
+	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
 )
 
 func BuildEmailTmpl(m domain.Message, tmplPath string) (buff bytes.Buffer, err error) {
