@@ -25,12 +25,7 @@ func NewAppConfig() *AppConfig {
 		log.Fatal(err)
 	}
 
-	//database, err := db.ConnectMongo(config.Db)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-
-	database, err := db.ConnectPostgres()
+	database, err := db.ConnectPostgres(config.Db)
 	if err != nil {
 		log.Fatal(err)
 	}

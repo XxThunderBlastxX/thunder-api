@@ -11,6 +11,12 @@ type DatabaseConfig struct {
 	Host string `pkl:"host"`
 
 	DbName string `pkl:"dbName"`
+
+	User string `pkl:"user"`
+
+	Password string `pkl:"password"`
+
+	Port string `pkl:"port"`
 }
 
 // LoadFromPath loads the pkl module at the given path and evaluates it into a DatabaseConfig

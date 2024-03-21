@@ -5,6 +5,9 @@ port = "port"
 db {
   dbName = "dbname"
   host = "host"
+  password = "password"
+  user = "user"
+  port = "port"
 }
 
 cloudflare {
