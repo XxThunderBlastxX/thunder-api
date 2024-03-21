@@ -7,7 +7,12 @@ type Project struct {
 	Name        string
 	Link        string
 	Description string
-	Stack       []string
+	Stacks      []TechStack `gorm:"foreignKey:id"`
+}
+
+type TechStack struct {
+	gorm.Model
+	Name string
 }
 
 type ProjectsRepository interface {

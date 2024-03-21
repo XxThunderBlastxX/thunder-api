@@ -6,6 +6,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
+	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
 	"github.com/XxThunderBlastxX/thunder-api/internal/gen/databaseconfig"
 )
 
@@ -16,6 +17,11 @@ func ConnectPostgres(dbConfig *databaseconfig.DatabaseConfig) (*gorm.DB, error) 
 	db, err := gorm.Open(postgres.New(postgres.Config{
 		DSN: dsn,
 	}), &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+
+	err = db.AutoMigrate(&domain.Project{}, &domain.TechStack{})
 	if err != nil {
 		return nil, err
 	}
