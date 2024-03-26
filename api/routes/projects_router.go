@@ -18,4 +18,5 @@ func ProjectsRouter(router fiber.Router, db *gorm.DB) {
 
 	proj.Post("/add", ctr.AddProject())
 	proj.Get("/list", ctr.GetProjects())
+	proj.Delete("/remove/:id", ctr.RemoveProject())
 }
