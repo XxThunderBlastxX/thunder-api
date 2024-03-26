@@ -4,25 +4,26 @@ import "gorm.io/gorm"
 
 type Project struct {
 	gorm.Model
-	Name        string
-	Link        string
-	Description string
-	Stacks      []TechStack `gorm:"foreignKey:id"`
+	Name        string      `json:"name"`
+	Link        string      `json:"link"`
+	Description string      `json:"description"`
+	Stacks      []TechStack `gorm:"foreignKey:ProjectID" json:"stacks"`
 }
 
 type TechStack struct {
 	gorm.Model
-	Name string
+	Name      string `json:"name"`
+	ProjectID uint   `gorm:"index"`
 }
 
 type ProjectsRepository interface {
 	AddProject(proj *Project) error
-	GetProjects() ([]*Project, error)
+	GetProjects() (*[]Project, error)
 	RemoveProject(id int) error
 }
 
 type ProjectsService interface {
 	AddProject(proj *Project) error
-	GetProjects() ([]*Project, error)
+	GetProjects() (*[]Project, error)
 	RemoveProject(id int) error
 }

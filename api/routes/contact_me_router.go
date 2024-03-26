@@ -12,9 +12,7 @@ import (
 
 func ContactMeRouter(router fiber.Router, config *appConfig.AppConfig) {
 	contactMeService := service.NewContactMeService(config.AppConfig.Smtp)
-	ctr := controller.ContactMeController{
-		ContactMeService: contactMeService,
-	}
+	ctr := controller.ContactMeController{ContactMeService: contactMeService}
 	contactMeRoute := router.Group("/contact_me")
 
 	// Middleware

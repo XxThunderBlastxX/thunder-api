@@ -17,6 +17,7 @@ func SetupRoutes(app *fiber.App, config *config.AppConfig) {
 	AppRouter(publicRouter, &config.Timer)
 	RedirectRouter(publicRouter, kvBaseURL, config.AppConfig.Cloudflare)
 	ContactMeRouter(publicRouter, config)
+	ProjectsRouter(publicRouter, config.Db)
 
 	app.Use(middleware.NewJWTMiddleware(config.AppConfig.Keycloak))
 
