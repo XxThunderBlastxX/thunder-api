@@ -21,6 +21,6 @@ func (p *projectsService) GetProjects() (*[]domain.Project, error) {
 
 }
 
-func (p *projectsService) RemoveProject(id int) error {
-	return p.ProjectsRepo.RemoveProject(id)
+func (p *projectsService) RemoveProject(name string) error {
+	return p.ProjectsRepo.RemoveProject(name)
 }

@@ -19,11 +19,11 @@ type TechStack struct {
 type ProjectsRepository interface {
 	AddProject(proj *Project) error
 	GetProjects() (*[]Project, error)
-	RemoveProject(id int) error
+	RemoveProject(name string) error
 }
 
 type ProjectsService interface {
 	AddProject(proj *Project) error
 	GetProjects() (*[]Project, error)
-	RemoveProject(id int) error
+	RemoveProject(name string) error
 }

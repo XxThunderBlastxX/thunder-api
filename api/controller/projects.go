@@ -1,8 +1,6 @@
 package controller
 
 import (
-	"strconv"
-
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
@@ -59,14 +57,9 @@ func (p *ProjectsController) GetProjects() fiber.Handler {
 
 func (p *ProjectsController) RemoveProject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		id, err := strconv.Atoi(c.Params("id"))
-		if err != nil {
-			return c.Status(fiber.StatusUnprocessableEntity).JSON(model.WebResponse[*model.ErrorResponse]{
-				Success: false,
-				Error:   err.Error(),
-			})
-		}
-		err = p.ProjectsService.RemoveProject(id)
+		name := c.Params("name")
+		
+		err := p.ProjectsService.RemoveProject(name)
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{
 				Success: false,

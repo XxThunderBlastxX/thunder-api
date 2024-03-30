@@ -35,8 +35,8 @@ func (p *projectsRepository) GetProjects() (*[]domain.Project, error) {
 	return projects, nil
 }
 
-func (p *projectsRepository) RemoveProject(id int) error {
-	trx := p.db.Delete(&domain.Project{}, id)
+func (p *projectsRepository) RemoveProject(name string) error {
+	trx := p.db.Delete(&domain.Project{}).Where("name = ?", name)
 	if trx.Error != nil {
 		return trx.Error
 	}
