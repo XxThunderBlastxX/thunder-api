@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"fmt"
+
 	"gorm.io/gorm"
 
 	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
@@ -35,10 +37,27 @@ func (p *projectsRepository) GetProjects() (*[]domain.Project, error) {
 	return projects, nil
 }
 
-func (p *projectsRepository) RemoveProject(name string) error {
-	trx := p.db.Delete(&domain.Project{}).Where("name = ?", name)
+func (p *projectsRepository) RemoveProjectById(id string) error {
+	trx := p.db.Where("id = ?", id).Delete(&domain.Project{})
 	if trx.Error != nil {
 		return trx.Error
+	}
+
+	if trx.RowsAffected == 0 {
+		return fmt.Errorf("no project found with id %s", id)
+	}
+
+	return nil
+}
+
+func (p *projectsRepository) RemoveProjectByName(name string) error {
+	trx := p.db.Where("name = ?", name).Delete(&domain.Project{})
+	if trx.Error != nil {
+		return trx.Error
+	}
+
+	if trx.RowsAffected == 0 {
+		return fmt.Errorf("no project found with name %s", name)
 	}
 
 	return nil

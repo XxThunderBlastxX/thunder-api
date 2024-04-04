@@ -57,14 +57,25 @@ func (p *ProjectsController) GetProjects() fiber.Handler {
 
 func (p *ProjectsController) RemoveProject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		name := c.Params("name")
-		
-		err := p.ProjectsService.RemoveProject(name)
-		if err != nil {
-			return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{
-				Success: false,
-				Error:   err.Error(),
-			})
+		id := c.Query("id", "")
+		name := c.Query("name", "")
+
+		if id != "" {
+			err := p.ProjectsService.RemoveProjectById(id)
+			if err != nil {
+				return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{
+					Success: false,
+					Error:   err.Error(),
+				})
+			}
+		} else {
+			err := p.ProjectsService.RemoveProjectByName(name)
+			if err != nil {
+				return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{
+					Success: false,
+					Error:   err.Error(),
+				})
+			}
 		}
 
 		return c.Status(fiber.StatusOK).JSON(model.WebResponse[*model.SuccessResponse]{
