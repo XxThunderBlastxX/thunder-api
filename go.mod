@@ -4,14 +4,15 @@ go 1.21.7
 
 require (
 	github.com/apple/pkl-go v0.6.0
+	github.com/go-resty/resty/v2 v2.12.0
 	github.com/goccy/go-json v0.10.2
 	github.com/gofiber/contrib/jwt v1.0.8
-	github.com/gofiber/fiber/v2 v2.52.3
+	github.com/gofiber/fiber/v2 v2.52.4
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/gookit/goutil v0.6.15
 	github.com/pkg/errors v0.9.1
 	gorm.io/driver/postgres v1.5.7
-	gorm.io/gorm v1.25.8
+	gorm.io/gorm v1.25.9
 )
 
 require (
@@ -38,8 +39,9 @@ require (
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
-	golang.org/x/crypto v0.21.0 // indirect
-	golang.org/x/sync v0.6.0 // indirect
-	golang.org/x/sys v0.18.0 // indirect
+	golang.org/x/crypto v0.22.0 // indirect
+	golang.org/x/net v0.24.0 // indirect
+	golang.org/x/sync v0.7.0 // indirect
+	golang.org/x/sys v0.19.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 )

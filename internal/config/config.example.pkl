@@ -24,10 +24,7 @@ smtp {
   password = "password"
 }
 
-keycloak {
-  authUrl = "https://url"
-  realm = "realm"
-  clientId = "id"
-  clientSecret = "secret"
-  realmRSA256PublicKey = "key"
+auth {
+  domain = "domain"
+  audience = "audience"
 }

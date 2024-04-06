@@ -17,11 +17,11 @@ func SetupRoutes(app *fiber.App, config *config.AppConfig) {
 	AppRouter(publicRouter, &config.Timer)
 	RedirectRouter(publicRouter, kvBaseURL, config.AppConfig.Cloudflare)
 	ContactMeRouter(publicRouter, config)
-	ProjectsRouter(publicRouter, config.Db)
 
-	app.Use(middleware.NewJWTMiddleware(config.AppConfig.Keycloak))
+	app.Use(middleware.NewJWTMiddleware())
 
 	// Private Routes (Requires Authorization to access these routes)
 	privateRouter := app.Group("/")
+	ProjectsRouter(publicRouter, config.Db)
 	KVRouter(privateRouter, kvBaseURL, config.AppConfig.Cloudflare)
 }
