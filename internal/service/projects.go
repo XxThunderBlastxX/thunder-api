@@ -16,8 +16,8 @@ func (p *projectsService) AddProject(proj *domain.Project) error {
 	return p.ProjectsRepo.AddProject(proj)
 }
 
-func (p *projectsService) GetProjects() (*[]domain.Project, error) {
-	return p.ProjectsRepo.GetProjects()
+func (p *projectsService) ListProjects() (*[]domain.Project, error) {
+	return p.ProjectsRepo.ListProjects()
 
 }
 

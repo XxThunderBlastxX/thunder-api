@@ -38,9 +38,9 @@ func (p *ProjectsController) AddProject() fiber.Handler {
 	}
 }
 
-func (p *ProjectsController) GetProjects() fiber.Handler {
+func (p *ProjectsController) ListProjects() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		projects, err := p.ProjectsService.GetProjects()
+		projects, err := p.ProjectsService.ListProjects()
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{
 				Success: false,

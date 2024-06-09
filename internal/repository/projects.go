@@ -27,7 +27,7 @@ func (p *projectsRepository) AddProject(proj *domain.Project) error {
 	return nil
 }
 
-func (p *projectsRepository) GetProjects() (*[]domain.Project, error) {
+func (p *projectsRepository) ListProjects() (*[]domain.Project, error) {
 	projects := &[]domain.Project{}
 	trx := p.db.Preload("Stacks").Find(&projects)
 	if trx.Error != nil {

@@ -17,6 +17,6 @@ func ProjectsRouter(router fiber.Router, db *gorm.DB) {
 	proj := router.Group("/projects")
 
 	proj.Post("/add", ctr.AddProject())
-	proj.Get("/list", ctr.GetProjects())
+	proj.Get("/list", ctr.ListProjects())
 	proj.Delete("/remove", ctr.RemoveProject())
 }
