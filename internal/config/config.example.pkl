@@ -3,11 +3,7 @@ amends "AppConfig.pkl"
 port = "port"
 
 db {
-  dbName = "dbname"
-  host = "host"
-  password = "password"
-  user = "user"
-  port = "port"
+  dsn = "dsn"
 }
 
 cloudflare {
@@ -15,13 +11,6 @@ cloudflare {
   kvNamespaceID = "id"
   token = "token"
   turnstileSecret = "secret"
-}
-
-smtp {
-  host = "host"
-  port = "port"
-  user = "user"
-  password = "password"
 }
 
 auth {

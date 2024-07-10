@@ -1,31 +1,19 @@
 package domain
 
-import "gorm.io/gorm"
-
-type Project struct {
-	gorm.Model
-	Name        string      `json:"name"`
-	Link        string      `json:"link"`
-	Description string      `json:"description"`
-	Stacks      []TechStack `gorm:"foreignKey:ProjectID" json:"stacks"`
-}
-
-type TechStack struct {
-	gorm.Model
-	Name      string `json:"name"`
-	ProjectID uint   `gorm:"index"`
-}
+import (
+	"github.com/XxThunderBlastxX/thunder-api/internal/db/gen/projectDb"
+)
 
 type ProjectsRepository interface {
-	AddProject(proj *Project) error
-	ListProjects() (*[]Project, error)
-	RemoveProjectById(id string) error
+	CreateProject(projParam *projectDb.CreateProjectParams) error
+	ListProjects() (*[]projectDb.Project, error)
+	RemoveProjectById(id int32) error
 	RemoveProjectByName(name string) error
 }
 
 type ProjectsService interface {
-	AddProject(proj *Project) error
-	ListProjects() (*[]Project, error)
-	RemoveProjectById(id string) error
+	CreateProject(project *projectDb.Project) error
+	ListProjects() (*[]projectDb.Project, error)
+	RemoveProjectById(id int32) error
 	RemoveProjectByName(name string) error
 }

@@ -4,10 +4,9 @@ package appconfig
 import (
 	"context"
 
-	"github.com/XxThunderBlastxX/thunder-api/internal/gen/authconfig"
-	"github.com/XxThunderBlastxX/thunder-api/internal/gen/cloudflareconfig"
-	"github.com/XxThunderBlastxX/thunder-api/internal/gen/databaseconfig"
-	"github.com/XxThunderBlastxX/thunder-api/internal/gen/smtpconfig"
+	"github.com/XxThunderBlastxX/thunder-api/internal/config/gen/authconfig"
+	"github.com/XxThunderBlastxX/thunder-api/internal/config/gen/cloudflareconfig"
+	"github.com/XxThunderBlastxX/thunder-api/internal/config/gen/databaseconfig"
 	"github.com/apple/pkl-go/pkl"
 )
 
@@ -19,8 +18,6 @@ type AppConfig struct {
 	Port string `pkl:"port"`
 
 	Db *databaseconfig.DatabaseConfig `pkl:"db"`
-
-	Smtp *smtpconfig.SMTPConfig `pkl:"smtp"`
 
 	Cloudflare *cloudflareconfig.CloudflareConfig `pkl:"cloudflare"`
 

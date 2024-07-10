@@ -1,10 +1,9 @@
-@go.Package{ name = "github.com/XxThunderBlastxX/thunder-api/internal/gen/appconfig" }
+@go.Package{ name = "github.com/XxThunderBlastxX/thunder-api/internal/config/gen/appconfig" }
 
 module thunderblast.thunderapi.AppConfig
 
 import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.5.3#/go.pkl"
 import "DatabaseConfig.pkl"
-import "SMTPConfig.pkl"
 import "CloudflareConfig.pkl"
 import "AuthConfig.pkl"
 
@@ -15,8 +14,6 @@ version : String(matches(Regex(#"(\d\.\d\.\d)"#))) = "0.4.0"
 port : String(!isEmpty)
 
 db : DatabaseConfig
-
-smtp : SMTPConfig
 
 cloudflare : CloudflareConfig
 

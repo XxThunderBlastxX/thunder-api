@@ -2,21 +2,18 @@ package config
 
 import (
 	"context"
+	"database/sql"
 	"log"
 	"time"
 
-	"gorm.io/gorm"
-
+	"github.com/XxThunderBlastxX/thunder-api/internal/config/gen/appconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/db"
-	"github.com/XxThunderBlastxX/thunder-api/internal/gen/appconfig"
 )
 
 type AppConfig struct {
 	AppConfig *appconfig.AppConfig
-
-	Db *gorm.DB
-
-	Timer time.Time
+	Db        *sql.DB
+	Timer     time.Time
 }
 
 func NewAppConfig() *AppConfig {
@@ -25,10 +22,17 @@ func NewAppConfig() *AppConfig {
 		log.Fatal(err)
 	}
 
-	database, err := db.ConnectPostgres(config.Db)
+	database, err := db.ConnectDb(config.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	defer func(database *sql.DB) {
+		err := database.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(database)
 
 	return &AppConfig{
 		AppConfig: config,

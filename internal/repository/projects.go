@@ -1,63 +1,55 @@
 package repository
 
 import (
-	"fmt"
+	"context"
 
-	"gorm.io/gorm"
-
+	"github.com/XxThunderBlastxX/thunder-api/internal/db/gen/projectDb"
 	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
 )
 
 type projectsRepository struct {
-	db *gorm.DB
+	ctx   context.Context
+	query *projectDb.Queries
 }
 
-func NewProjectsRepository(db *gorm.DB) domain.ProjectsRepository {
+func NewProjectsRepository(ctx context.Context, query *projectDb.Queries) domain.ProjectsRepository {
 	return &projectsRepository{
-		db: db,
+		ctx:   ctx,
+		query: query,
 	}
 }
 
-func (p *projectsRepository) AddProject(proj *domain.Project) error {
-	trx := p.db.Create(&proj)
-	if trx.Error != nil {
-		return trx.Error
+func (p *projectsRepository) CreateProject(projParam *projectDb.CreateProjectParams) error {
+	_, err := p.query.CreateProject(p.ctx, *projParam)
+	if err != nil {
+		return err
 	}
 
 	return nil
 }
 
-func (p *projectsRepository) ListProjects() (*[]domain.Project, error) {
-	projects := &[]domain.Project{}
-	trx := p.db.Preload("Stacks").Find(&projects)
-	if trx.Error != nil {
-		return nil, trx.Error
+func (p *projectsRepository) ListProjects() (*[]projectDb.Project, error) {
+	projList, err := p.query.ListProjects(p.ctx)
+	if err != nil {
+		return nil, err
 	}
 
-	return projects, nil
+	return &projList, nil
 }
 
-func (p *projectsRepository) RemoveProjectById(id string) error {
-	trx := p.db.Where("id = ?", id).Delete(&domain.Project{})
-	if trx.Error != nil {
-		return trx.Error
-	}
-
-	if trx.RowsAffected == 0 {
-		return fmt.Errorf("no project found with id %s", id)
+func (p *projectsRepository) RemoveProjectById(id int32) error {
+	err := p.query.DeleteProjectById(p.ctx, id)
+	if err != nil {
+		return err
 	}
 
 	return nil
 }
 
 func (p *projectsRepository) RemoveProjectByName(name string) error {
-	trx := p.db.Where("name = ?", name).Delete(&domain.Project{})
-	if trx.Error != nil {
-		return trx.Error
-	}
-
-	if trx.RowsAffected == 0 {
-		return fmt.Errorf("no project found with name %s", name)
+	err := p.query.DeleteProjectByName(p.ctx, name)
+	if err != nil {
+		return err
 	}
 
 	return nil

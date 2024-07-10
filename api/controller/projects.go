@@ -1,8 +1,11 @@
 package controller
 
 import (
+	"strconv"
+
 	"github.com/gofiber/fiber/v2"
 
+	"github.com/XxThunderBlastxX/thunder-api/internal/db/gen/projectDb"
 	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
 	"github.com/XxThunderBlastxX/thunder-api/internal/model"
 )
@@ -13,7 +16,9 @@ type ProjectsController struct {
 
 func (p *ProjectsController) AddProject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		var proj domain.Project
+		var proj projectDb.Project
+
+		print(c.Request().String())
 
 		err := c.BodyParser(&proj)
 		if err != nil {
@@ -23,7 +28,7 @@ func (p *ProjectsController) AddProject() fiber.Handler {
 			})
 		}
 
-		err = p.ProjectsService.AddProject(&proj)
+		err = p.ProjectsService.CreateProject(&proj)
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{
 				Success: false,
@@ -57,11 +62,18 @@ func (p *ProjectsController) ListProjects() fiber.Handler {
 
 func (p *ProjectsController) RemoveProject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		id := c.Query("id", "")
+		id, err := strconv.Atoi(c.Query("id", "0"))
+		if err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(model.WebResponse[*model.ErrorResponse]{
+				Success: false,
+				Error:   "Invalid ID format",
+			})
+		}
+
 		name := c.Query("name", "")
 
-		if id != "" {
-			err := p.ProjectsService.RemoveProjectById(id)
+		if name != "" {
+			err := p.ProjectsService.RemoveProjectByName(name)
 			if err != nil {
 				return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{
 					Success: false,
@@ -69,7 +81,7 @@ func (p *ProjectsController) RemoveProject() fiber.Handler {
 				})
 			}
 		} else {
-			err := p.ProjectsService.RemoveProjectByName(name)
+			err := p.ProjectsService.RemoveProjectById(int32(id))
 			if err != nil {
 				return c.Status(fiber.StatusInternalServerError).JSON(model.WebResponse[*model.ErrorResponse]{
 					Success: false,

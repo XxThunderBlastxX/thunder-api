@@ -1,6 +1,9 @@
 package service
 
-import "github.com/XxThunderBlastxX/thunder-api/internal/domain"
+import (
+	"github.com/XxThunderBlastxX/thunder-api/internal/db/gen/projectDb"
+	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
+)
 
 type projectsService struct {
 	ProjectsRepo domain.ProjectsRepository
@@ -12,16 +15,23 @@ func NewProjectsService(projectsRepo domain.ProjectsRepository) domain.ProjectsS
 	}
 }
 
-func (p *projectsService) AddProject(proj *domain.Project) error {
-	return p.ProjectsRepo.AddProject(proj)
+func (p *projectsService) CreateProject(project *projectDb.Project) error {
+	projParam := &projectDb.CreateProjectParams{
+		Name:        project.Name,
+		Description: project.Description,
+		Link:        project.Link,
+		Stacks:      project.Stacks,
+	}
+
+	return p.ProjectsRepo.CreateProject(projParam)
 }
 
-func (p *projectsService) ListProjects() (*[]domain.Project, error) {
+func (p *projectsService) ListProjects() (*[]projectDb.Project, error) {
 	return p.ProjectsRepo.ListProjects()
 
 }
 
-func (p *projectsService) RemoveProjectById(id string) error {
+func (p *projectsService) RemoveProjectById(id int32) error {
 	return p.ProjectsRepo.RemoveProjectById(id)
 }
 

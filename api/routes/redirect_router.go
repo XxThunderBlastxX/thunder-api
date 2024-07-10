@@ -4,7 +4,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/XxThunderBlastxX/thunder-api/api/controller"
-	"github.com/XxThunderBlastxX/thunder-api/internal/gen/cloudflareconfig"
+	"github.com/XxThunderBlastxX/thunder-api/internal/config/gen/cloudflareconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/repository"
 	"github.com/XxThunderBlastxX/thunder-api/internal/service"
 )
