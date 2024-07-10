@@ -16,7 +16,6 @@ func SetupRoutes(app *fiber.App, config *config.AppConfig) {
 	publicRouter := app.Group("/")
 	AppRouter(publicRouter, &config.Timer)
 	RedirectRouter(publicRouter, kvBaseURL, config.AppConfig.Cloudflare)
-	ContactMeRouter(publicRouter, config)
 
 	app.Use(middleware.NewJWTMiddleware())
 
