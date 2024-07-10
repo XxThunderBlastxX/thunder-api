@@ -11,7 +11,7 @@ func AppController(appTimer *time.Time) fiber.Handler {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"status":  "OK",
 			"app":     "Thunder-API",
-			"version": "1.0.0",
+			"version": "1.5.0",
 			"uptime": fiber.Map{
 				"start": appTimer,
 				"hr":    time.Since(*appTimer).Hours(),
