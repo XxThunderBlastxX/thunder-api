@@ -1,0 +1,30 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  # Install dependencies
+  - name: Install dependencies
+    init: make update
+
+  # Initialize app config
+  - name: Generate app config
+    env:
+      PORT: 4040
+    before: touch ./internal/config/config.pkl
+    init: copy ./internal/config/config.example.pkl ./internal/config/config.pkl
+    command: sed -i "s/port = \"port\"/port = \"$PORT\"/" ./internal/config/config.pkl \
+      && sed -i "s/dsn = \"dsn\"/dsn = \"$DSN\"/" ./internal/config/config.pkl \
+      && sed -i "s/accountID = \"id\"/accountID = \"$ACCOUNT_ID\"/" ./internal/config/config.pkl \
+      && sed -i "s/kvNamespaceID = \"id\"/kvNamespaceID = \"$KV_NAMESPACE_ID\"/" ./internal/config/config.pkl \
+      && sed -i "s/token = \"token\"/token = \"$TOKEN\"/" ./internal/config/config.pkl \
+      && sed -i "s/turnstileSecret = \"secret\"/turnstileSecret = \"$TURNSTILE_SECRET\"/" ./internal/config/config.pkl \
+      && sed -i "s/domain = \"domain\"/domain = \"$DOMAIN\"/" ./internal/config/config.pkl \
+      sed -i "s/audience = \"audience\"/audience = \"$AUDIENCE\"/" ./internal/config/config.pkl
+
+  # Run the project
+  - name: Run project
+    command: make watch
+
+ports:
+  - port: 4040
+    onOpen: open-browser
