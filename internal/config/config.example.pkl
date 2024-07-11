@@ -12,8 +12,3 @@ cloudflare {
   token = "token"
   turnstileSecret = "secret"
 }
-
-auth {
-  domain = "domain"
-  audience = "audience"
-}

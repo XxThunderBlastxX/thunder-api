@@ -5,16 +5,12 @@ module thunderblast.thunderapi.AppConfig
 import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.5.3#/go.pkl"
 import "DatabaseConfig.pkl"
 import "CloudflareConfig.pkl"
-import "AuthConfig.pkl"
-
 
 name : String(!isEmpty) = "thunder-api"
-version : String(matches(Regex(#"(\d\.\d\.\d)"#))) = "0.4.0"
+version : String(matches(Regex(#"(\d\.\d\.\d)"#))) = "0.6.0"
 
 port : String(!isEmpty)
 
 db : DatabaseConfig
 
 cloudflare : CloudflareConfig
-
-auth : AuthConfig

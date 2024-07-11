@@ -14,12 +14,10 @@ tasks:
     init: copy ./internal/config/config.example.pkl ./internal/config/config.pkl
     command: sed -i "s/port = \"port\"/port = \"$PORT\"/" ./internal/config/config.pkl \
       && sed -i "s/dsn = \"dsn\"/dsn = \"$DSN\"/" ./internal/config/config.pkl \
-      && sed -i "s/accountID = \"id\"/accountID = \"$ACCOUNT_ID\"/" ./internal/config/config.pkl \
-      && sed -i "s/kvNamespaceID = \"id\"/kvNamespaceID = \"$KV_NAMESPACE_ID\"/" ./internal/config/config.pkl \
-      && sed -i "s/token = \"token\"/token = \"$TOKEN\"/" ./internal/config/config.pkl \
-      && sed -i "s/turnstileSecret = \"secret\"/turnstileSecret = \"$TURNSTILE_SECRET\"/" ./internal/config/config.pkl \
-      && sed -i "s/domain = \"domain\"/domain = \"$DOMAIN\"/" ./internal/config/config.pkl \
-      sed -i "s/audience = \"audience\"/audience = \"$AUDIENCE\"/" ./internal/config/config.pkl
+      && sed -i "s/accountID = \"id\"/accountID = \"$CLOUDFLARE_ACCOUNT_ID\"/" ./internal/config/config.pkl \
+      && sed -i "s/kvNamespaceID = \"id\"/kvNamespaceID = \"$CLOUDFLARE_KV_NAMESPACE_ID\"/" ./internal/config/config.pkl \
+      && sed -i "s/token = \"token\"/token = \"$CLOUDFLARE_TOKEN\"/" ./internal/config/config.pkl \
+      && sed -i "s/turnstileSecret = \"secret\"/turnstileSecret = \"$CLOUDFLARE_TURNSTILE_SECRET\"/" ./internal/config/config.pkl
 
   # Run the project
   - name: Run project
