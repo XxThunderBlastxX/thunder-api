@@ -13,7 +13,7 @@ tasks:
     before: touch ./internal/config/config.pkl
     init: cp ./internal/config/config.example.pkl ./internal/config/config.pkl
     command: sed -i "s/port = \"port\"/port = \"$PORT\"/" ./internal/config/config.pkl \
-      && sed -i "s/dsn = \"dsn\"/dsn = \"$DSN\"/" ./internal/config/config.pkl \
+      && sed -i "s/dsn = \"dsn\"/dsn = \"$DB\"/" ./internal/config/config.pkl \
       && sed -i "s/accountID = \"id\"/accountID = \"$CLOUDFLARE_ACCOUNT_ID\"/" ./internal/config/config.pkl \
       && sed -i "s/kvNamespaceID = \"id\"/kvNamespaceID = \"$CLOUDFLARE_KV_NAMESPACE_ID\"/" ./internal/config/config.pkl \
       && sed -i "s/token = \"token\"/token = \"$CLOUDFLARE_TOKEN\"/" ./internal/config/config.pkl \
@@ -25,4 +25,15 @@ tasks:
 
 ports:
   - port: 4040
+    visibility: public
     onOpen: open-browser
+
+jetbrains:
+  goland:
+    plugins:
+      - com.almightyalpaca.intellij.plugins.discord
+      - mobi.hsz.idea.gitignore
+      - ru.adelf.idea.dotenv
+      - com.ypwang.plugin.go-linter
+      - com.github.copilot
+      - com.mallowigi
