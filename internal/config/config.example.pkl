@@ -10,5 +10,4 @@ cloudflare {
   accountID = "id"
   kvNamespaceID = "id"
   token = "token"
-  turnstileSecret = "secret"
 }

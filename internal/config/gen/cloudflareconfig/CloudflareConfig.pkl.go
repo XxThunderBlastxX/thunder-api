@@ -13,8 +13,6 @@ type CloudflareConfig struct {
 	KvNamespaceID string `pkl:"kvNamespaceID"`
 
 	Token string `pkl:"token"`
-
-	TurnstileSecret string `pkl:"turnstileSecret"`
 }
 
 // LoadFromPath loads the pkl module at the given path and evaluates it into a CloudflareConfig

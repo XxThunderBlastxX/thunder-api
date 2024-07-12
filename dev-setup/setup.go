@@ -12,7 +12,14 @@ func main() {
 	configExampleFile := "./internal/config/config.example.pkl"
 
 	// Check if environment variables are set
-	envVars := []string{"PORT", "DB", "CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_KV_NAMESPACE_ID", "CLOUDFLARE_TOKEN", "CLOUDFLARE_TURNSTILE_SECRET"}
+	envVars := []string{
+		"PORT",
+		"DB",
+		"CLOUDFLARE_ACCOUNT_ID",
+		"CLOUDFLARE_KV_NAMESPACE_ID",
+		"CLOUDFLARE_TOKEN",
+	}
+
 	for _, envVar := range envVars {
 		if _, ok := os.LookupEnv(envVar); !ok {
 			fmt.Printf("Error: environment variable '%s' is not set\n", envVar)
@@ -47,12 +54,11 @@ func main() {
 	// Replace placeholders with environment variables
 	replacedContent := string(data)
 	placeholders := map[string]string{
-		"port = \"port\"":              os.Getenv("PORT"),
-		"dsn = \"dsn\"":                os.Getenv("DB"),
-		"accountID = \"id\"":           os.Getenv("CLOUDFLARE_ACCOUNT_ID"),
-		"kvNamespaceID = \"id\"":       os.Getenv("CLOUDFLARE_KV_NAMESPACE_ID"),
-		"token = \"token\"":            os.Getenv("CLOUDFLARE_TOKEN"),
-		"turnstileSecret = \"secret\"": os.Getenv("CLOUDFLARE_TURNSTILE_SECRET"),
+		"port = \"port\"":        os.Getenv("PORT"),
+		"dsn = \"dsn\"":          os.Getenv("DB"),
+		"accountID = \"id\"":     os.Getenv("CLOUDFLARE_ACCOUNT_ID"),
+		"kvNamespaceID = \"id\"": os.Getenv("CLOUDFLARE_KV_NAMESPACE_ID"),
+		"token = \"token\"":      os.Getenv("CLOUDFLARE_TOKEN"),
 	}
 
 	for placeholder, value := range placeholders {

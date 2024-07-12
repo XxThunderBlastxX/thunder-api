@@ -8,7 +8,3 @@ accountID : String(!isEmpty)
 kvNamespaceID : String(!isEmpty)
 
 token : String(!isEmpty)
-
-turnstileSecret : String(!isEmpty)
-
-

@@ -4,7 +4,6 @@ package appconfig
 import (
 	"context"
 
-	"github.com/XxThunderBlastxX/thunder-api/internal/config/gen/authconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/config/gen/cloudflareconfig"
 	"github.com/XxThunderBlastxX/thunder-api/internal/config/gen/databaseconfig"
 	"github.com/apple/pkl-go/pkl"
@@ -20,8 +19,6 @@ type AppConfig struct {
 	Db *databaseconfig.DatabaseConfig `pkl:"db"`
 
 	Cloudflare *cloudflareconfig.CloudflareConfig `pkl:"cloudflare"`
-
-	Auth *authconfig.AuthConfig `pkl:"auth"`
 }
 
 // LoadFromPath loads the pkl module at the given path and evaluates it into a AppConfig
