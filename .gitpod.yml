@@ -10,14 +10,7 @@ tasks:
   - name: Generate app config
     env:
       PORT: 4040
-    before: touch ./internal/config/config.pkl
-    init: cp ./internal/config/config.example.pkl ./internal/config/config.pkl
-    command: sed -i "s/port = \"port\"/port = \"$PORT\"/" ./internal/config/config.pkl \
-      && sed -i "s/dsn = \"dsn\"/dsn = \"$DB\"/" ./internal/config/config.pkl \
-      && sed -i "s/accountID = \"id\"/accountID = \"$CLOUDFLARE_ACCOUNT_ID\"/" ./internal/config/config.pkl \
-      && sed -i "s/kvNamespaceID = \"id\"/kvNamespaceID = \"$CLOUDFLARE_KV_NAMESPACE_ID\"/" ./internal/config/config.pkl \
-      && sed -i "s/token = \"token\"/token = \"$CLOUDFLARE_TOKEN\"/" ./internal/config/config.pkl \
-      && sed -i "s/turnstileSecret = \"secret\"/turnstileSecret = \"$CLOUDFLARE_TURNSTILE_SECRET\"/" ./internal/config/config.pkl
+    init: go run ./dev-setup/setup.go
 
   # Run the project
   - name: Run project
@@ -26,7 +19,7 @@ tasks:
 ports:
   - port: 4040
     visibility: public
-    onOpen: open-browser
+    onOpen: notify
 
 jetbrains:
   goland:
