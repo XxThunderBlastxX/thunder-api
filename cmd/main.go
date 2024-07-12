@@ -11,22 +11,28 @@ import (
 	appConfig "github.com/XxThunderBlastxX/thunder-api/internal/config"
 )
 
-var (
-	config *appConfig.AppConfig //nolint:gochecknoglobals
-)
-
-func init() {
-	config = appConfig.NewAppConfig()
-}
-
 func main() {
+	// Initializing app configuration
+	config := appConfig.NewAppConfig()
+
+	// Initializing fiber app
 	app := fiber.New()
 
+	// Middlewares
 	app.Use(cors.New(cors.Config{}))
 	app.Use(middleware.RateLimiter())
 	app.Use(middleware.RequestLogger())
 
+	// Setting up routes
 	routes.SetupRoutes(app, config)
+
+	// Defer closing the database connection
+	defer func(appConfig *appConfig.AppConfig) {
+		err := appConfig.Db.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(config)
 
 	if err := app.Listen(":" + config.AppConfig.Port); err != nil {
 		log.Fatal(err)

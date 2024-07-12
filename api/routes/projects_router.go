@@ -3,6 +3,7 @@ package routes
 import (
 	"context"
 	"database/sql"
+	"github.com/XxThunderBlastxX/thunder-api/api/middleware"
 
 	"github.com/gofiber/fiber/v2"
 
@@ -15,6 +16,7 @@ import (
 func ProjectsRouter(router fiber.Router, db *sql.DB) {
 	ctx := context.Background()
 	dbQuery := projectDb.New(db)
+	jwtMiddleware := middleware.NewJWTMiddleware()
 
 	projectsRepo := repository.NewProjectsRepository(ctx, dbQuery)
 	projectsService := service.NewProjectsService(projectsRepo)
@@ -22,7 +24,7 @@ func ProjectsRouter(router fiber.Router, db *sql.DB) {
 
 	proj := router.Group("/projects")
 
-	proj.Post("/add", ctr.AddProject())
+	proj.Post("/add", jwtMiddleware, ctr.AddProject())
+	proj.Delete("/remove", jwtMiddleware, ctr.RemoveProject())
 	proj.Get("/list", ctr.ListProjects())
-	proj.Delete("/remove", ctr.RemoveProject())
 }

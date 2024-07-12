@@ -27,13 +27,6 @@ func NewAppConfig() *AppConfig {
 		log.Fatal(err)
 	}
 
-	defer func(database *sql.DB) {
-		err := database.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(database)
-
 	return &AppConfig{
 		AppConfig: config,
 		Db:        database,
