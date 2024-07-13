@@ -2,8 +2,8 @@
 SELECT * FROM projects;
 
 -- name: CreateProject :one
-INSERT INTO projects (id, name, description, link, stacks)
-VALUES ($1, $2, $3, $4, $5)
+INSERT INTO projects (name, description, link, stacks)
+VALUES ($1, $2, $3, $4)
 RETURNING *;
 
 -- name: DeleteProjectById :exec

@@ -18,8 +18,6 @@ func (p *ProjectsController) AddProject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		var proj projectDb.Project
 
-		print(c.Request().String())
-
 		err := c.BodyParser(&proj)
 		if err != nil {
 			return c.Status(fiber.StatusUnprocessableEntity).JSON(model.WebResponse[*model.ErrorResponse]{
