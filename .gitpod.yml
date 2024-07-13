@@ -24,9 +24,6 @@ ports:
 jetbrains:
   goland:
     plugins:
-      - com.almightyalpaca.intellij.plugins.discord
       - mobi.hsz.idea.gitignore
       - ru.adelf.idea.dotenv
       - com.ypwang.plugin.go-linter
-      - com.github.copilot
-      - com.mallowigi
