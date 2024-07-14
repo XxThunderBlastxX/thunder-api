@@ -1,10 +1,10 @@
 package main
 
 import (
-	"log"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/favicon"
+	"log"
 
 	"github.com/XxThunderBlastxX/thunder-api/api/middleware"
 	"github.com/XxThunderBlastxX/thunder-api/api/routes"
@@ -18,10 +18,20 @@ func main() {
 	// Initializing fiber app
 	app := fiber.New()
 
-	// Middlewares
+	// Cors Middlewares
 	app.Use(cors.New(cors.Config{}))
+
+	// Rate Limiter Middleware
 	app.Use(middleware.RateLimiter())
+
+	// Request Logger Middleware
 	app.Use(middleware.RequestLogger())
+
+	// Favicon Middleware
+	app.Use(favicon.New(favicon.Config{
+		Data:         config.Favicon,
+		CacheControl: "public, max-age=31536000",
+	}))
 
 	// Setting up routes
 	routes.SetupRoutes(app, config)

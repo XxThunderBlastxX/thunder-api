@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"database/sql"
+	"github.com/XxThunderBlastxX/thunder-api/internal/utils"
 	"log"
 	"time"
 
@@ -14,6 +15,7 @@ type AppConfig struct {
 	AppConfig *appconfig.AppConfig
 	Db        *sql.DB
 	Timer     time.Time
+	Favicon   []byte
 }
 
 func NewAppConfig() *AppConfig {
@@ -27,9 +29,15 @@ func NewAppConfig() *AppConfig {
 		log.Fatal(err)
 	}
 
+	favicon, err := utils.GetFavicon()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	return &AppConfig{
 		AppConfig: config,
 		Db:        database,
 		Timer:     time.Now(),
+		Favicon:   favicon,
 	}
 }
