@@ -1,5 +1,6 @@
 -- name: ListProjects :many
-SELECT * FROM projects;
+SELECT * FROM projects
+ORDER BY id;
 
 -- name: CreateProject :one
 INSERT INTO projects (name, description, link, stacks)

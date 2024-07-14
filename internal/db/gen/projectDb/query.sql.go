@@ -66,6 +66,7 @@ func (q *Queries) DeleteProjectByName(ctx context.Context, name string) error {
 
 const listProjects = `-- name: ListProjects :many
 SELECT id, name, description, link, stacks, created_at, updated_at FROM projects
+ORDER BY id
 `
 
 func (q *Queries) ListProjects(ctx context.Context) ([]Project, error) {
