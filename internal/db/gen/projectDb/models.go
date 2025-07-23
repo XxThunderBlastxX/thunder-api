@@ -10,11 +10,11 @@ import (
 )
 
 type Project struct {
-	ID          int32 	 		`json:"id"`
-	Name        string   		`json:"name"`
-	Description string   		`json:"description"`
-	Link        string   		`json:"link"`
-	Stacks      []string 		`json:"stacks"`
-	CreatedAt   time.Time  		`json:"created_at"`
-	UpdatedAt   sql.NullTime 	`json:"updated_at"`
+	ID          int32        `json:"id"`
+	Name        string       `json:"name"`
+	Description string       `json:"description"`
+	Link        string       `json:"link"`
+	Stacks      []string     `json:"stacks"`
+	CreatedAt   time.Time    `json:"created_at"`
+	UpdatedAt   sql.NullTime `json:"updated_at"`
 }

@@ -1,13 +1,13 @@
 package routes
 
-import (
-	"time"
+// import (
+// 	"time"
 
-	"github.com/gofiber/fiber/v2"
+// 	"github.com/gofiber/fiber/v2"
 
-	"github.com/XxThunderBlastxX/thunder-api/api/controller"
-)
+// 	"github.com/XxThunderBlastxX/thunder-api/api/controller"
+// )
 
-func AppRouter(router fiber.Router, timer *time.Time) {
-	router.Get("/", controller.AppController(timer))
-}
+// func AppRouter(router fiber.Router, timer *time.Time) {
+// 	router.Get("/", controller.AppController(timer))
+// }
