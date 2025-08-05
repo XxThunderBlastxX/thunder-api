@@ -1,31 +1,23 @@
 package service
 
-import (
-	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
-)
+type KVService struct{}
 
-type kvService struct {
-	KVRepo domain.KVRepository
+func NewKVService() *KVService {
+	return &KVService{}
 }
 
-func NewKVService(kvRepo domain.KVRepository) domain.KVService {
-	return &kvService{
-		KVRepo: kvRepo,
-	}
+func (kv *KVService) GetValue(key string) (string, error) {
+	panic("GetValue method not implemented")
 }
 
-func (kv *kvService) GetValue(key string) (string, error) {
-	return kv.KVRepo.GetValue(key)
+func (kv *KVService) SetKeyValue(key string, value string) error {
+	panic("SetKeyValue method not implemented")
 }
 
-func (kv *kvService) SetKeyValue(key string, value string) error {
-	return kv.KVRepo.SetKeyValue(key, value)
+func (kv *KVService) DeleteKey(key string) error {
+	panic("DeleteKey method not implemented")
 }
 
-func (kv *kvService) DeleteKey(key string) error {
-	return kv.KVRepo.DeleteKey(key)
-}
-
-func (kv *kvService) ListKeys() ([]string, error) {
-	return kv.KVRepo.ListKeys()
+func (kv *KVService) ListKeys() ([]string, error) {
+	panic("ListKeys method not implemented")
 }

@@ -1,40 +1,58 @@
 package service
 
 import (
-	"github.com/XxThunderBlastxX/thunder-api/internal/db/gen/projectDb"
-	"github.com/XxThunderBlastxX/thunder-api/internal/domain"
+	"github.com/XxThunderBlastxX/thunder-api/internal/database"
+	"github.com/XxThunderBlastxX/thunder-api/internal/models"
 )
 
-type projectsService struct {
-	ProjectsRepo domain.ProjectsRepository
+type ProjectService struct {
+	db *database.ConnectionManager
 }
 
-func NewProjectsService(projectsRepo domain.ProjectsRepository) domain.ProjectsService {
-	return &projectsService{
-		ProjectsRepo: projectsRepo,
+func NewProjectsService(db *database.ConnectionManager) *ProjectService {
+	return &ProjectService{
+		db: db,
 	}
 }
 
-func (p *projectsService) CreateProject(project *projectDb.Project) error {
-	projParam := &projectDb.CreateProjectParams{
-		Name:        project.Name,
-		Description: project.Description,
-		Link:        project.Link,
-		Stacks:      project.Stacks,
+func (p *ProjectService) CreateProject(project *models.Project) error {
+	if err := p.db.Create(project).Error; err != nil {
+		return err
 	}
 
-	return p.ProjectsRepo.CreateProject(projParam)
+	return nil
 }
 
-func (p *projectsService) ListProjects() (*[]projectDb.Project, error) {
-	return p.ProjectsRepo.ListProjects()
+func (p *ProjectService) GetProjectByID(id string) (*models.Project, error) {
+	var project models.Project
+	if err := p.db.First(&project, id).Error; err != nil {
+		return nil, err
+	}
 
+	return &project, nil
 }
 
-func (p *projectsService) RemoveProjectById(id int32) error {
-	return p.ProjectsRepo.RemoveProjectById(id)
+func (p *ProjectService) UpdateProject(id string, project *models.Project) error {
+	if err := p.db.Where("id = ?", id).Updates(project).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func (p *projectsService) RemoveProjectByName(name string) error {
-	return p.ProjectsRepo.RemoveProjectByName(name)
+func (p *ProjectService) DeleteProject(id string) error {
+	if err := p.db.Delete(&models.Project{}, id).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *ProjectService) ListProjects() ([]models.Project, error) {
+	var projects []models.Project
+	if err := p.db.Find(&projects).Error; err != nil {
+		return nil, err
+	}
+
+	return projects, nil
 }

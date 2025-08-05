@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/XxThunderBlastxX/thunder-api/internal/router"
 	"github.com/XxThunderBlastxX/thunder-api/internal/server"
-	"github.com/XxThunderBlastxX/thunder-api/internal/transport/http/router"
 )
 
 func main() {

@@ -2,7 +2,7 @@ package server
 
 import (
 	"github.com/XxThunderBlastxX/thunder-api/internal/config"
-	"github.com/XxThunderBlastxX/thunder-api/internal/infrastructure/postgres"
+	"github.com/XxThunderBlastxX/thunder-api/internal/database"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -10,7 +10,7 @@ type App struct {
 	*fiber.App
 
 	Config *config.AppConfig
-	PgConn *postgres.ConnectionManager
+	PgConn *database.ConnectionManager
 }
 
 func New() *App {
@@ -21,7 +21,7 @@ func New() *App {
 	cfg := config.NewAppConfig()
 
 	// Initializing PostgreSQL connection
-	pgConn := postgres.MustNew(cfg.Database)
+	pgConn := database.New(cfg.Database)
 
 	return &App{
 		App:    app,
