@@ -16,7 +16,7 @@ func New(app *server.App) *Router {
 
 func (r *Router) RegisterRoutes() {
 	r.kvRouter()
-	// r.appRouter()
-	// r.projectRouter()
+	r.projectRouter()
+	r.appRouter()
 	// r.redirectRouter()
 }

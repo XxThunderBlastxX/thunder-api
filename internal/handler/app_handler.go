@@ -12,7 +12,10 @@ func NewAppHandler() *AppHandler {
 
 func (h *AppHandler) HandleRequest() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		// Handle the request here
-		return nil
+		res := fiber.Map{
+			"message": "Welcome to Thunder API",
+			"status":  "success",
+		}
+		return c.Status(fiber.StatusOK).JSON(res)
 	}
 }
