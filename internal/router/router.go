@@ -18,5 +18,5 @@ func (r *Router) RegisterRoutes() {
 	r.kvRouter()
 	r.projectRouter()
 	r.appRouter()
-	// r.redirectRouter()
+	r.redirectRouter()
 }
