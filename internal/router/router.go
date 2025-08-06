@@ -1,6 +1,8 @@
 package router
 
-import "github.com/XxThunderBlastxX/thunder-api/internal/server"
+import (
+	"github.com/XxThunderBlastxX/thunder-api/internal/server"
+)
 
 type Router struct {
 	app *server.App
@@ -13,8 +15,8 @@ func New(app *server.App) *Router {
 }
 
 func (r *Router) RegisterRoutes() {
-	r.appRouter()
-	r.projectRouter()
 	r.kvRouter()
-	r.redirectRouter()
+	// r.appRouter()
+	// r.projectRouter()
+	// r.redirectRouter()
 }
